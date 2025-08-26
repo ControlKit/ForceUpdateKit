@@ -14,12 +14,13 @@ public class UpdateService: UpdateServiceProtocol {
             guard let url = URL(string: request.route) else {
                 return UpdateResponse()
             }
-            var request = URLRequest(url: url)
-            request.setValue(
+            var req = URLRequest(url: url)
+            req.allHTTPHeaderFields = request.dictionary
+            req.setValue(
                 "application/json",
-                forHTTPHeaderField: "Content-Type"
+                forHTTPHeaderField: "Content-Type",
             )
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, _) = try await URLSession.shared.data(for: req)
             if let updateResponse = try? JSONDecoder().decode(UpdateResponse.self, from: data) {
                 print(updateResponse)
                 return updateResponse

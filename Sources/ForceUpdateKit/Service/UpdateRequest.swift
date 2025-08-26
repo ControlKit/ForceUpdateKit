@@ -14,7 +14,7 @@ public struct UpdateRequest {
     public var language: String = "en"
     public var deviceUUID: String = UUID().uuidString
     
-    var dictionary: [String: Any] {
+    var dictionary: [String: String] {
         return ["x-app-id": appId,
                 "x-version": version,
                 "x-device-uuid": deviceUUID]
