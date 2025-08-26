@@ -13,14 +13,16 @@ public class ForceUpdateKit: Updatable {
     public func configure(config: UpdateServiceConfig) async {
         Task {
             let request = UpdateRequest(appId: config.appId,
-                                        version: config.version,
+                                        applicationVersion: config.version,
                                         route: config.route)
             let response = try await self.update(request: request)
             let viewModel = DefaultForceUpdateViewModel(response: response)
+            let forceUpdateView = ForceUpdateViewStyle.make(
+                viewModel: viewModel,
+                config: config.viewConfig
+            )
             if response.data?.force ?? false {
                 DispatchQueue.main.async {
-                    let forceUpdateView = ForceUpdateViewStyle.make(viewModel: viewModel,
-                                                                    config: config.viewConfig)
                     let window = UIApplication.shared.windows.last!
                     forceUpdateView.center.y += forceUpdateView.frame.height
                     window.addSubview(forceUpdateView)
