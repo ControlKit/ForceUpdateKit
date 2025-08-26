@@ -18,7 +18,7 @@ public struct ForceUpdateViewPresenter {
             let version = getLocalizeString(localVersion) { self.config.versionText = version }
         if let localDescription = data?.description,
            let description = getLocalizeString(localDescription) { self.config.descriptionText = description }
-        if let icon = data?.icon, let url = URL(string: icon) { downloadImage(from: url) }
+        if let icon = data?.icon, let url = URL(string: icon) { setImageToConfig(from: url) }
     }
     
     func getLocalizeString(_ localize: LocalString) -> String? {
@@ -32,7 +32,7 @@ public struct ForceUpdateViewPresenter {
         return localizeString.content
     }
     
-    func downloadImage(from url: URL) {
+    func setImageToConfig(from url: URL) {
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
             self.config.updateImage = UIImage(data: data)
