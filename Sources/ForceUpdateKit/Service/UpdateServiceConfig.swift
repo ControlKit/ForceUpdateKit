@@ -7,7 +7,9 @@
 
 import Foundation
 public struct UpdateServiceConfig {
-    public init(style: ForceUpdateViewStyle = .fullscreen1, language: String) {
+    public init(style: ForceUpdateViewStyle = .fullscreen1,
+                appId: String,
+                language: String) {
         self.viewConfig = ForceUpdateViewStyle.getViewConfigWithStyle(style: style, language: language)
     }
     public var route: String = "https://tauri.ir/api/force-updates"
