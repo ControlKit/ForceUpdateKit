@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public class ForceUpdateView_FullScreen2: UIView, ForceUpdateViewProtocol {
+open class ForceUpdateView_FullScreen2: UIView, ForceUpdateViewProtocol {
     var config: ForceUpdateViewConfig
     var viewModel: ForceUpdateViewModel
     
@@ -102,13 +102,10 @@ public class ForceUpdateView_FullScreen2: UIView, ForceUpdateViewProtocol {
     }
     
     public required init(viewModel: ForceUpdateViewModel,
-                         config: ForceUpdateViewConfig = FullScreen2ForceUpdateViewConfig()) {
+                         config: ForceUpdateViewConfig) {
         self.config = config
         self.viewModel = viewModel
-        if let title = viewModel.response.title { self.config.headerTitle = title }
-        if let buttonTitle = viewModel.response.buttonTitle { self.config.updateButtonNortmalTitle = buttonTitle }
-        if let version = viewModel.response.version { self.config.versionText = version }
-        if let description = viewModel.response.description { self.config.descriptionText = description }
+        self.config = ForceUpdateViewPresenter(data: viewModel.response.data, config: config).config
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         setup()
     }
@@ -347,9 +344,9 @@ public class ForceUpdateView_FullScreen2: UIView, ForceUpdateViewProtocol {
     }
 }
 
-public class FullScreen2ForceUpdateViewConfig: ForceUpdateViewConfig {
-    public override init() {
-        super.init()
+open class FullScreen2ForceUpdateViewConfig: ForceUpdateViewConfig {
+    public override init(lang: String) {
+        super.init(lang: lang)
         style = .fullscreen2
     }
 }

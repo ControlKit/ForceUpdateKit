@@ -39,20 +39,20 @@ public enum ForceUpdateViewStyle {
         }
     }
     
-    public static func getViewConfigWithStyle(style: ForceUpdateViewStyle) -> ForceUpdateViewConfig {
+    public static func getViewConfigWithStyle(style: ForceUpdateViewStyle, language: String) -> ForceUpdateViewConfig {
         switch style {
         case .fullscreen1:
-            FullScreen1ForceUpdateViewConfig()
+            FullScreen1ForceUpdateViewConfig(lang: language)
         case .fullscreen2:
-            FullScreen2ForceUpdateViewConfig()
+            FullScreen2ForceUpdateViewConfig(lang: language)
         case .fullscreen3:
-            FullScreen3ForceUpdateViewConfig()
+            FullScreen3ForceUpdateViewConfig(lang: language)
         case .fullscreen4:
-            FullScreen4ForceUpdateViewConfig()
+            FullScreen4ForceUpdateViewConfig(lang: language)
         case .popover1:
-            Popover1ForceUpdateViewConfig()
+            Popover1ForceUpdateViewConfig(lang: language)
         case .popover2:
-            Popover2ForceUpdateViewConfig()
+            Popover2ForceUpdateViewConfig(lang: language)
         }
     }
 }

@@ -12,12 +12,12 @@ public struct UpdateRequest {
     public var route: String
     public var os: String = "iOs"
     public var language: String = "en"
+    public var deviceUUID: String = UUID().uuidString
     
     var dictionary: [String: Any] {
-        return ["appId": appId,
-                "version": version,
-                "os": os,
-                "lang": language]
+        return ["x-app-id": appId,
+                "x-version": version,
+                "x-device-uuid": deviceUUID]
     }
     
     var nsDictionary: NSDictionary {

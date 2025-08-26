@@ -12,7 +12,7 @@ public class UpdateService: UpdateServiceProtocol {
     public func update(request: UpdateRequest) async throws -> UpdateResponse {
         do {
             guard let url = URL(string: request.route) else {
-                return UpdateResponse(forceUpdate: false)
+                return UpdateResponse()
             }
             var request = URLRequest(url: url)
             request.setValue(
@@ -25,11 +25,11 @@ public class UpdateService: UpdateServiceProtocol {
                 return updateResponse
             } else {
                 print("Invalid Response")
-                return UpdateResponse(forceUpdate: false)
+                return UpdateResponse()
             }
         } catch {
             print("Failed to Send POST Request \(error)")
-            return UpdateResponse(forceUpdate: false)
+            return UpdateResponse()
         }
     }
 }
