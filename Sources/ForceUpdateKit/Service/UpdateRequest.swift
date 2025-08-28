@@ -16,7 +16,7 @@ public struct UpdateRequest {
     var dictionary: [String: String] {
         return ["x-app-id": appId,
                 "x-version": applicationVersion,
-                "sdk-version": sdkVersion,
+                "x-sdk-version": sdkVersion,
                 "x-device-uuid": deviceUUID]
     }
     
