@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol UpdateServiceProtocol {
-    func update(request: UpdateRequest) async throws -> UpdateResponse
+    func update(request: UpdateRequest) async throws -> UpdateResponse?
 }

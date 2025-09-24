@@ -16,7 +16,6 @@ public struct UpdateModel: Codable {
     public let id: String?
     public let title: LocalString?
     public let description: LocalString?
-    public let force: Bool?
     public let icon: String?
     public let link: String?
     public let button_title: LocalString?

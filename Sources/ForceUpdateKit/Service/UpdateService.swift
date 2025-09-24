@@ -9,10 +9,10 @@ import Foundation
 
 public class UpdateService: UpdateServiceProtocol {
     public init() {}
-    public func update(request: UpdateRequest) async throws -> UpdateResponse {
+    public func update(request: UpdateRequest) async throws -> UpdateResponse? {
         do {
             guard let url = URL(string: request.route) else {
-                return UpdateResponse()
+                return nil
             }
             var req = URLRequest(url: url)
             req.allHTTPHeaderFields = request.dictionary
@@ -26,11 +26,11 @@ public class UpdateService: UpdateServiceProtocol {
                 return updateResponse
             } else {
                 print("Invalid Response")
-                return UpdateResponse()
+                return nil
             }
         } catch {
             print("Failed to Send POST Request \(error)")
-            return UpdateResponse()
+            return nil
         }
     }
 }

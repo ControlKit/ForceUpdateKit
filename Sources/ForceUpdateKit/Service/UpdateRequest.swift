@@ -11,7 +11,7 @@ public struct UpdateRequest {
     public var applicationVersion: String = Bundle.main.releaseVersionNumber ?? String()
     public var route: String
     public var deviceUUID: String = UUID().uuidString
-    public var sdkVersion: String = "1.0.0"
+    public var sdkVersion: String = forceUpdateKit_Version
     
     var dictionary: [String: String] {
         return ["x-app-id": appId,
