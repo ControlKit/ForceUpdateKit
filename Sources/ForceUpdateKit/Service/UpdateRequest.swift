@@ -7,7 +7,7 @@
 
 import Foundation
 public struct UpdateRequest {
-    public var appId: String = Bundle.main.bundleIdentifier ?? String()
+    public var appId: String
     public var applicationVersion: String = Bundle.main.releaseVersionNumber ?? String()
     public var route: String
     public var deviceUUID: String = UUID().uuidString
