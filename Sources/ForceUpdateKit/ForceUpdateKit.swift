@@ -25,12 +25,13 @@ public class ForceUpdateKit: Updatable {
                             viewModel: viewModel,
                             config: config.viewConfig
                         )
-                        let window = UIApplication.shared.windows.last!
-                        forceUpdateView.center.y += forceUpdateView.frame.height
-                        window.addSubview(forceUpdateView)
-                        forceUpdateView.fixInView(window)
-                        UIView.animate(withDuration: 1.0) {
-                            forceUpdateView.center.y -= forceUpdateView.frame.height
+                        if let window = UIApplication.shared.windows.last {
+                            forceUpdateView.center.y += forceUpdateView.frame.height
+                            window.addSubview(forceUpdateView)
+                            forceUpdateView.fixInView(window)
+                            UIView.animate(withDuration: 1.0) {
+                                forceUpdateView.center.y -= forceUpdateView.frame.height
+                            }
                         }
                     }
                 }
