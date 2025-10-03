@@ -199,7 +199,7 @@ open class ForceUpdateView_FullScreen1: UIView, ForceUpdateViewProtocol {
             toItem: nil,
             attribute: .notAnAttribute,
             multiplier: 1,
-            constant: 50).isActive = true
+            constant: 30).isActive = true
     }
     
     public func setDescriptionViewConstraint() {
@@ -219,7 +219,7 @@ open class ForceUpdateView_FullScreen1: UIView, ForceUpdateViewProtocol {
             toItem: headerTitle,
             attribute: .bottom,
             multiplier: 1,
-            constant: 56).isActive = true
+            constant: 24).isActive = true
         
         descriptionLabel.leadingAnchor.constraint(
             equalTo: contentView.leadingAnchor,
