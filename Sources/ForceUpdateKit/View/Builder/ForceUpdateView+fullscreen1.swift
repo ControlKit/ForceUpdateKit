@@ -119,10 +119,12 @@ open class ForceUpdateView_FullScreen1: UIView, ForceUpdateViewProtocol {
         contentBackGroundImageView.fixInView(contentView)
         contentView.addSubview(updateImageView)
         contentView.addSubview(updateButton)
+        contentView.addSubview(headerTitle)
         contentView.addSubview(descriptionLabel)
         commonInit()
         setUpdateImageViewConstraint()
         setTitleViewConstraint()
+        setDescriptionViewConstraint()
         setButtonConstraint()
     }
     
@@ -168,6 +170,39 @@ open class ForceUpdateView_FullScreen1: UIView, ForceUpdateViewProtocol {
     }
     
     public func setTitleViewConstraint() {
+        headerTitle.translatesAutoresizingMaskIntoConstraints = false
+           NSLayoutConstraint(
+            item: headerTitle,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: contentView,
+            attribute: .centerX,
+            multiplier: 1,
+            constant: 0).isActive = true
+           NSLayoutConstraint(
+            item: headerTitle,
+            attribute: .top,
+            relatedBy: .equal,
+            toItem: updateImageView,
+            attribute: .bottom,
+            multiplier: 1,
+            constant: 56).isActive = true
+        
+        headerTitle.leadingAnchor.constraint(
+            equalTo: contentView.leadingAnchor,
+            constant: 24).isActive = true
+        
+           NSLayoutConstraint(
+            item: headerTitle,
+            attribute: .height,
+            relatedBy: .greaterThanOrEqual,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 1,
+            constant: 50).isActive = true
+    }
+    
+    public func setDescriptionViewConstraint() {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
            NSLayoutConstraint(
             item: descriptionLabel,
@@ -181,7 +216,7 @@ open class ForceUpdateView_FullScreen1: UIView, ForceUpdateViewProtocol {
             item: descriptionLabel,
             attribute: .top,
             relatedBy: .equal,
-            toItem: updateImageView,
+            toItem: headerTitle,
             attribute: .bottom,
             multiplier: 1,
             constant: 56).isActive = true
