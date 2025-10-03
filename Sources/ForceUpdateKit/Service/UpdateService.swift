@@ -20,16 +20,21 @@ public class UpdateService: UpdateServiceProtocol {
                 "application/json",
                 forHTTPHeaderField: "Content-Type",
             )
-            let (data, _) = try await URLSession.shared.data(for: req)
+            let (data, res) = try await URLSession.shared.data(for: req)
+            if (res as? HTTPURLResponse)?.statusCode == 204 {
+                print("Force Update Response --> 204")
+                return nil
+            }
             if let updateResponse = try? JSONDecoder().decode(UpdateResponse.self, from: data) {
+                print("Force Update Response --> 200")
                 print(updateResponse)
                 return updateResponse
             } else {
-                print("Invalid Response")
+                print("Force Update Response --> Decode Error")
                 return nil
             }
         } catch {
-            print("Failed to Send POST Request \(error)")
+            print("Failed to Request Force Update \(error)")
             return nil
         }
     }
