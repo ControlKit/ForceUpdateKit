@@ -16,12 +16,13 @@ final class UpdateResponseTests: XCTestCase {
             id: "test-id",
             title: [LocalizedText(language: "en", content: "Update Available")],
             description: [LocalizedText(language: "en", content: "Please update your app")],
+            force: true,
             icon: "update-icon",
             link: "https://apps.apple.com/app/test",
             button_title: [LocalizedText(language: "en", content: "Update")],
             cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
             version: [LocalizedText(language: "en", content: "1.0.0")],
-            sdk_version: 1,
+            sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
             created_at: "2024-01-01T00:00:00Z"
@@ -35,7 +36,7 @@ final class UpdateResponseTests: XCTestCase {
         XCTAssertEqual(response.data?.id, "test-id")
         XCTAssertEqual(response.data?.icon, "update-icon")
         XCTAssertEqual(response.data?.link, "https://apps.apple.com/app/test")
-        XCTAssertEqual(response.data?.sdk_version, 1)
+        XCTAssertEqual(response.data?.sdk_version, "1.0.0")
         XCTAssertEqual(response.data?.minimum_version, "1.0.0")
         XCTAssertEqual(response.data?.maximum_version, "2.0.0")
     }
@@ -74,12 +75,13 @@ final class UpdateResponseTests: XCTestCase {
             id: "test-id",
             title: title,
             description: description,
+            force: true,
             icon: "update-icon",
             link: "https://apps.apple.com/app/test",
             button_title: [LocalizedText(language: "en", content: "Update")],
             cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
             version: [LocalizedText(language: "en", content: "1.0.0")],
-            sdk_version: 1,
+            sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
             created_at: "2024-01-01T00:00:00Z"
@@ -98,12 +100,13 @@ final class UpdateResponseTests: XCTestCase {
             id: "test-id",
             title: [LocalizedText(language: "en", content: "Update Available")],
             description: [LocalizedText(language: "en", content: "Please update your app")],
+            force: true,
             icon: "update-icon",
             link: "https://apps.apple.com/app/test",
             button_title: [LocalizedText(language: "en", content: "Update")],
             cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
             version: [LocalizedText(language: "en", content: "1.0.0")],
-            sdk_version: 1,
+            sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
             created_at: "2024-01-01T00:00:00Z"

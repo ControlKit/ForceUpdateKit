@@ -15,10 +15,12 @@ public class ForceUpdateKit: Updatable {
     public func configure(config: UpdateServiceConfig) async {
         Task {
             let request = UpdateRequest(appId: config.appId,
-                                        applicationVersion: config.version,
-                                        route: config.route)
+                                        applicationVersion: config.version)
             if let response = try await self.update(request: request) {
-                let viewModel = DefaultForceUpdateViewModel(response: response)
+                let viewModel = DefaultForceUpdateViewModel(
+                    serviceConfig: config,
+                    response: response
+                )
                 if response.data != nil {
                     DispatchQueue.main.async {
                         let forceUpdateView = ForceUpdateViewStyle.make(

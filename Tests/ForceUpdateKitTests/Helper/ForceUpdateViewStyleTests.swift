@@ -132,7 +132,13 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     
     func testMakeViewWithFullscreen1() {
         // Given
-        let viewModel = DefaultForceUpdateViewModel(response: UpdateResponse(data: nil))
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: UpdateResponse(data: nil)
+        )
         let config = ForceUpdateViewConfig(lang: "en")
         config.style = .fullscreen1
         
@@ -146,7 +152,13 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     
     func testMakeViewWithFullscreen2() {
         // Given
-        let viewModel = DefaultForceUpdateViewModel(response: UpdateResponse(data: nil))
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: UpdateResponse(data: nil)
+        )
         let config = ForceUpdateViewConfig(lang: "en")
         config.style = .fullscreen2
         
@@ -160,7 +172,13 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     
     func testMakeViewWithFullscreen3() {
         // Given
-        let viewModel = DefaultForceUpdateViewModel(response: UpdateResponse(data: nil))
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: UpdateResponse(data: nil)
+        )
         let config = ForceUpdateViewConfig(lang: "en")
         config.style = .fullscreen3
         
@@ -174,7 +192,13 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     
     func testMakeViewWithFullscreen4() {
         // Given
-        let viewModel = DefaultForceUpdateViewModel(response: UpdateResponse(data: nil))
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: UpdateResponse(data: nil)
+        )
         let config = ForceUpdateViewConfig(lang: "en")
         config.style = .fullscreen4
         
@@ -188,7 +212,13 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     
     func testMakeViewWithPopover1() {
         // Given
-        let viewModel = DefaultForceUpdateViewModel(response: UpdateResponse(data: nil))
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: UpdateResponse(data: nil)
+        )
         let config = ForceUpdateViewConfig(lang: "en")
         config.style = .popover1
         
@@ -202,7 +232,13 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     
     func testMakeViewWithPopover2() {
         // Given
-        let viewModel = DefaultForceUpdateViewModel(response: UpdateResponse(data: nil))
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: UpdateResponse(data: nil)
+        )
         let config = ForceUpdateViewConfig(lang: "en")
         config.style = .popover2
         
@@ -216,7 +252,13 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     
     func testMakeViewWithAllStyles() {
         // Given
-        let viewModel = DefaultForceUpdateViewModel(response: UpdateResponse(data: nil))
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: UpdateResponse(data: nil)
+        )
         let styles: [ForceUpdateViewStyle] = [.fullscreen1, .fullscreen2, .fullscreen3, .fullscreen4, .popover1, .popover2]
         
         // When & Then

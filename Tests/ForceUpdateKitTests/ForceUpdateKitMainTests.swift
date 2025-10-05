@@ -55,8 +55,7 @@ final class ForceUpdateKitMainTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en",
-            version: "1.0.0"
+            language: "en"
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
@@ -76,8 +75,7 @@ final class ForceUpdateKitMainTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en",
-            version: "1.0.0"
+            language: "en"
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = true
@@ -95,8 +93,7 @@ final class ForceUpdateKitMainTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en",
-            version: "1.0.0"
+            language: "en"
         )
         mockUpdateService.shouldReturnSuccess = false
         mockUpdateService.shouldReturnNil = false
@@ -120,8 +117,7 @@ final class ForceUpdateKitMainTests: XCTestCase {
             let config = UpdateServiceConfig(
                 style: style,
                 appId: "com.test.app",
-                language: "en",
-                version: "1.0.0"
+                language: "en"
             )
             
             await forceUpdateKit.configure(config: config)
@@ -142,8 +138,7 @@ final class ForceUpdateKitMainTests: XCTestCase {
             let config = UpdateServiceConfig(
                 style: .fullscreen1,
                 appId: "com.test.app",
-                language: language,
-                version: "1.0.0"
+                language: language
             )
             
             await forceUpdateKit.configure(config: config)
@@ -158,10 +153,8 @@ final class ForceUpdateKitMainTests: XCTestCase {
         var config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en",
-            version: "1.0.0"
+            language: "en"
         )
-        config.route = "https://custom.api.com/update"
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
         

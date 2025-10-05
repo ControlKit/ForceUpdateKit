@@ -130,11 +130,13 @@ open class ForceUpdateView_Popover1: UIView, ForceUpdateViewProtocol {
         setTitleViewConstraint()
         setDescriptionConstraint()
         setButtonConstraint()
+        viewModel.setAction(.view)
     }
     
     @objc
     func openLink() {
         viewModel.openLink()
+        viewModel.setAction(.update)
     }
     
     public func setPopupViewConstraint() {

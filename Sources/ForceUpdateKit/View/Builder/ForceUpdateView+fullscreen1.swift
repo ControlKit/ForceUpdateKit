@@ -126,11 +126,13 @@ open class ForceUpdateView_FullScreen1: UIView, ForceUpdateViewProtocol {
         setTitleViewConstraint()
         setDescriptionViewConstraint()
         setButtonConstraint()
+        viewModel.setAction(.view)
     }
     
     @objc
     func openLink() {
         viewModel.openLink()
+        viewModel.setAction(.update)
     }
     
     public func setUpdateImageViewConstraint() {

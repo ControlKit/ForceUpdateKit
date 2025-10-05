@@ -28,8 +28,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en",
-            version: "1.0.0"
+            language: "en"
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
@@ -51,8 +50,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .popover1,
             appId: "com.test.app",
-            language: "fa",
-            version: "2.0.0"
+            language: "fa"
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = true
@@ -72,8 +70,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen2,
             appId: "com.test.app",
-            language: "ar",
-            version: "3.0.0"
+            language: "ar"
         )
         mockUpdateService.shouldReturnSuccess = false
         mockUpdateService.shouldReturnNil = false
@@ -91,9 +88,9 @@ final class IntegrationTests: XCTestCase {
     func testMultipleConfigurations() async {
         // Given
         let configs = [
-            UpdateServiceConfig(style: .fullscreen1, appId: "com.app1", language: "en", version: "1.0.0"),
-            UpdateServiceConfig(style: .fullscreen2, appId: "com.app2", language: "fa", version: "2.0.0"),
-            UpdateServiceConfig(style: .popover1, appId: "com.app3", language: "ar", version: "3.0.0")
+            UpdateServiceConfig(style: .fullscreen1, appId: "com.app1", language: "en"),
+            UpdateServiceConfig(style: .fullscreen2, appId: "com.app2", language: "fa"),
+            UpdateServiceConfig(style: .popover1, appId: "com.app3", language: "ar")
         ]
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
@@ -119,8 +116,7 @@ final class IntegrationTests: XCTestCase {
             let config = UpdateServiceConfig(
                 style: style,
                 appId: "com.test.app",
-                language: "en",
-                version: "1.0.0"
+                language: "en"
             )
             
             await forceUpdateKit.configure(config: config)
@@ -142,8 +138,7 @@ final class IntegrationTests: XCTestCase {
             let config = UpdateServiceConfig(
                 style: .fullscreen1,
                 appId: "com.test.app",
-                language: language,
-                version: "1.0.0"
+                language: language
             )
             
             await forceUpdateKit.configure(config: config)
@@ -159,10 +154,8 @@ final class IntegrationTests: XCTestCase {
         var config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en",
-            version: "1.0.0"
+            language: "en"
         )
-        config.route = "https://custom.api.com/force-update"
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
         
@@ -180,12 +173,13 @@ final class IntegrationTests: XCTestCase {
             id: "integration-test",
             title: [LocalizedText(language: "en", content: "Integration Test Update")],
             description: [LocalizedText(language: "en", content: "This is an integration test")],
+            force: true,
             icon: "test-icon",
             link: "https://apps.apple.com/app/integration-test",
             button_title: [LocalizedText(language: "en", content: "Update Now")],
             cancel_button_title: [LocalizedText(language: "en", content: "Later")],
             version: [LocalizedText(language: "en", content: "1.0.0")],
-            sdk_version: 1,
+            sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
             created_at: "2024-01-01T00:00:00Z"
@@ -198,8 +192,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en",
-            version: "1.0.0"
+            language: "en"
         )
         
         // When
@@ -217,8 +210,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en",
-            version: "1.0.0"
+            language: "en"
         )
         mockUpdateService.shouldReturnSuccess = false
         mockUpdateService.shouldReturnNil = false
@@ -236,8 +228,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en",
-            version: "1.0.0"
+            language: "en"
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false

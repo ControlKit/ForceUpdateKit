@@ -18,18 +18,25 @@ final class ForceUpdateViewModelTests: XCTestCase {
             id: "test-id",
             title: [LocalizedText(language: "en", content: "Update Available")],
             description: [LocalizedText(language: "en", content: "Please update your app")],
+            force: true,
             icon: "update-icon",
             link: "https://apps.apple.com/app/test",
             button_title: [LocalizedText(language: "en", content: "Update")],
             cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
             version: [LocalizedText(language: "en", content: "1.0.0")],
-            sdk_version: 1,
+            sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
             created_at: "2024-01-01T00:00:00Z"
         )
         mockResponse = UpdateResponse(data: updateModel)
-        viewModel = DefaultForceUpdateViewModel(response: mockResponse)
+        viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: mockResponse
+        )
     }
     
     override func tearDownWithError() throws {
@@ -39,7 +46,13 @@ final class ForceUpdateViewModelTests: XCTestCase {
     
     func testViewModelInitialization() {
         // Given & When
-        let viewModel = DefaultForceUpdateViewModel(response: mockResponse)
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: mockResponse
+        )
         
         // Then
         XCTAssertNotNil(viewModel)
@@ -53,12 +66,13 @@ final class ForceUpdateViewModelTests: XCTestCase {
             id: "new-id",
             title: [LocalizedText(language: "en", content: "New Update")],
             description: [LocalizedText(language: "en", content: "New description")],
+            force: true,
             icon: "new-icon",
             link: "https://apps.apple.com/app/new",
             button_title: [LocalizedText(language: "en", content: "Update")],
             cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
             version: [LocalizedText(language: "en", content: "2.0.0")],
-            sdk_version: 2,
+            sdk_version: "1.0.0",
             minimum_version: "2.0.0",
             maximum_version: "3.0.0",
             created_at: "2024-02-01T00:00:00Z"
@@ -71,7 +85,7 @@ final class ForceUpdateViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(viewModel.response.data?.id, "new-id")
         XCTAssertEqual(viewModel.response.data?.link, "https://apps.apple.com/app/new")
-        XCTAssertEqual(viewModel.response.data?.sdk_version, 2)
+        XCTAssertEqual(viewModel.response.data?.sdk_version, "1.0.0")
     }
     
     func testOpenLinkWithValidURL() {
@@ -96,18 +110,25 @@ final class ForceUpdateViewModelTests: XCTestCase {
             id: "test-id",
             title: [LocalizedText(language: "en", content: "Update Available")],
             description: [LocalizedText(language: "en", content: "Please update your app")],
+            force: true,
             icon: "update-icon",
             link: nil,
             button_title: [LocalizedText(language: "en", content: "Update")],
             cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
             version: [LocalizedText(language: "en", content: "1.0.0")],
-            sdk_version: 1,
+            sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
             created_at: "2024-01-01T00:00:00Z"
         )
         let response = UpdateResponse(data: updateModel)
-        let viewModel = DefaultForceUpdateViewModel(response: response)
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: response
+        )
         
         // When
         viewModel.openLink()
@@ -123,18 +144,25 @@ final class ForceUpdateViewModelTests: XCTestCase {
             id: "test-id",
             title: [LocalizedText(language: "en", content: "Update Available")],
             description: [LocalizedText(language: "en", content: "Please update your app")],
+            force: true,
             icon: "update-icon",
             link: "invalid-url",
             button_title: [LocalizedText(language: "en", content: "Update")],
             cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
             version: [LocalizedText(language: "en", content: "1.0.0")],
-            sdk_version: 1,
+            sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
             created_at: "2024-01-01T00:00:00Z"
         )
         let response = UpdateResponse(data: updateModel)
-        let viewModel = DefaultForceUpdateViewModel(response: response)
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: response
+        )
         
         // When
         viewModel.openLink()
@@ -146,7 +174,13 @@ final class ForceUpdateViewModelTests: XCTestCase {
     
     func testViewModelProtocolConformance() {
         // Given & When
-        let viewModel = DefaultForceUpdateViewModel(response: mockResponse)
+        let viewModel = DefaultForceUpdateViewModel(
+            serviceConfig: UpdateServiceConfig(
+                appId: "sdsd",
+                language: "en"
+            ),
+            response: mockResponse
+        )
         
         // Then
         XCTAssertTrue(viewModel is ForceUpdateViewModel)

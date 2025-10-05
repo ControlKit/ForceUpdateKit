@@ -8,15 +8,25 @@
 import Foundation
 import UIKit
 
-public protocol ForceUpdateViewModel {
+public protocol ForceUpdateViewModel: Actionable {
     var response: UpdateResponse { get set }
+    var actionService: ActionServiceProtocol { get set }
+    var serviceConfig: UpdateServiceConfig { get set }
     func openLink()
 }
 
 public final class DefaultForceUpdateViewModel: ForceUpdateViewModel {
+    public var serviceConfig: UpdateServiceConfig
     public var response: UpdateResponse
-    public init(response: UpdateResponse) {
+    public var actionService: ActionServiceProtocol
+    public init(
+        serviceConfig: UpdateServiceConfig,
+        response: UpdateResponse,
+        actionService: ActionServiceProtocol = ActionService()
+    ) {
+        self.serviceConfig = serviceConfig
         self.response = response
+        self.actionService = actionService
     }
     public func openLink() {
         if let url = response.data?.link, let urlFinal = URL(string: url) {

@@ -9,7 +9,7 @@ import Foundation
 public struct UpdateRequest {
     public var appId: String
     public var applicationVersion: String = Bundle.main.releaseVersionNumber ?? String()
-    public var route: String
+    public var route: String = "https://tauri.ir/api/force-updates/"
     public var deviceUUID: String = UUID().uuidString
     public var sdkVersion: String = forceUpdateKit_Version
     
