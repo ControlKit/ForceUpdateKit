@@ -12,7 +12,7 @@ final class ForceUpdateViewConfigTests: XCTestCase {
     
     func testForceUpdateViewConfigInitialization() {
         // Given
-        let language = "en"
+        let language = CKLanguage.english
         
         // When
         let config = ForceUpdateViewConfig(lang: language)
@@ -46,7 +46,7 @@ final class ForceUpdateViewConfigTests: XCTestCase {
     
     func testForceUpdateViewConfigWithDifferentLanguage() {
         // Given
-        let language = "fa"
+        let language = CKLanguage.persian
         
         // When
         let config = ForceUpdateViewConfig(lang: language)
@@ -57,7 +57,7 @@ final class ForceUpdateViewConfigTests: XCTestCase {
     
     func testForceUpdateViewConfigStyleProperty() {
         // Given
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         
         // When
         config.style = .popover2
@@ -68,7 +68,7 @@ final class ForceUpdateViewConfigTests: XCTestCase {
     
     func testForceUpdateViewConfigButtonTitles() {
         // Given
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         
         // When
         config.updateButtonNortmalTitle = "Custom Update"
@@ -81,7 +81,7 @@ final class ForceUpdateViewConfigTests: XCTestCase {
     
     func testForceUpdateViewConfigColors() {
         // Given
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         
         // When
         config.contentViewBackColor = .red
@@ -108,7 +108,7 @@ final class ForceUpdateViewConfigTests: XCTestCase {
     
     func testForceUpdateViewConfigFonts() {
         // Given
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         
         // When
         config.updateButtonFont = UIFont.systemFont(ofSize: 16, weight: .bold)
@@ -125,7 +125,7 @@ final class ForceUpdateViewConfigTests: XCTestCase {
     
     func testForceUpdateViewConfigTexts() {
         // Given
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         
         // When
         config.headerTitle = "Custom Header"
@@ -140,7 +140,7 @@ final class ForceUpdateViewConfigTests: XCTestCase {
     
     func testForceUpdateViewConfigCornerRadius() {
         // Given
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         
         // When
         config.popupViewCornerRadius = 25.0
@@ -153,7 +153,7 @@ final class ForceUpdateViewConfigTests: XCTestCase {
     
     func testForceUpdateViewConfigBorder() {
         // Given
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         
         // When
         config.updateButtonBorderWidth = 2.0
@@ -166,7 +166,7 @@ final class ForceUpdateViewConfigTests: XCTestCase {
     
     func testForceUpdateViewConfigImageType() {
         // Given
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         
         // When
         config.updateImageType = .gear

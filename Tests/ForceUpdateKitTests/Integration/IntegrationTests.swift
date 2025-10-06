@@ -28,7 +28,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en"
+            language: CKLanguage.english
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
@@ -50,7 +50,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .popover1,
             appId: "com.test.app",
-            language: "fa"
+            language: CKLanguage.persian
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = true
@@ -70,7 +70,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen2,
             appId: "com.test.app",
-            language: "ar"
+            language: CKLanguage.arabic
         )
         mockUpdateService.shouldReturnSuccess = false
         mockUpdateService.shouldReturnNil = false
@@ -88,9 +88,9 @@ final class IntegrationTests: XCTestCase {
     func testMultipleConfigurations() async {
         // Given
         let configs = [
-            UpdateServiceConfig(style: .fullscreen1, appId: "com.app1", language: "en"),
-            UpdateServiceConfig(style: .fullscreen2, appId: "com.app2", language: "fa"),
-            UpdateServiceConfig(style: .popover1, appId: "com.app3", language: "ar")
+            UpdateServiceConfig(style: .fullscreen1, appId: "com.app1", language: CKLanguage.english),
+            UpdateServiceConfig(style: .fullscreen2, appId: "com.app2", language: CKLanguage.persian),
+            UpdateServiceConfig(style: .popover1, appId: "com.app3", language: CKLanguage.arabic)
         ]
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
@@ -116,7 +116,7 @@ final class IntegrationTests: XCTestCase {
             let config = UpdateServiceConfig(
                 style: style,
                 appId: "com.test.app",
-                language: "en"
+                language: CKLanguage.english
             )
             
             await forceUpdateKit.configure(config: config)
@@ -129,7 +129,17 @@ final class IntegrationTests: XCTestCase {
     
     func testDifferentLanguages() async {
         // Given
-        let languages = ["en", "fa", "ar", "es", "fr", "de", "zh", "ja", "ko"]
+        let languages = [
+            CKLanguage.english,
+            CKLanguage.persian,
+            CKLanguage.arabic,
+            CKLanguage.spanish,
+            CKLanguage.french,
+            CKLanguage.german,
+            CKLanguage.chineseSimplified,
+            CKLanguage.japanese,
+            CKLanguage.korean
+        ]
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
         
@@ -154,7 +164,7 @@ final class IntegrationTests: XCTestCase {
         var config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en"
+            language: CKLanguage.english
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
@@ -171,14 +181,14 @@ final class IntegrationTests: XCTestCase {
         // Given
         let updateModel = UpdateModel(
             id: "integration-test",
-            title: [LocalizedText(language: "en", content: "Integration Test Update")],
-            description: [LocalizedText(language: "en", content: "This is an integration test")],
+            title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Integration Test Update")],
+            description: [LocalizedText(language: CKLanguage.english.rawValue, content: "This is an integration test")],
             force: true,
             icon: "test-icon",
             link: "https://apps.apple.com/app/integration-test",
-            button_title: [LocalizedText(language: "en", content: "Update Now")],
-            cancel_button_title: [LocalizedText(language: "en", content: "Later")],
-            version: [LocalizedText(language: "en", content: "1.0.0")],
+            button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update Now")],
+            cancel_button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Later")],
+            version: [LocalizedText(language: CKLanguage.english.rawValue, content: "1.0.0")],
             sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
@@ -192,7 +202,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en"
+            language: CKLanguage.english
         )
         
         // When
@@ -210,7 +220,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en"
+            language: CKLanguage.english
         )
         mockUpdateService.shouldReturnSuccess = false
         mockUpdateService.shouldReturnNil = false
@@ -228,7 +238,7 @@ final class IntegrationTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en"
+            language: CKLanguage.english
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false

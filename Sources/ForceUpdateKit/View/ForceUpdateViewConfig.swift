@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 open class ForceUpdateViewConfig {
-    public init(lang: String) {
+    public init(lang: CKLanguage) {
         self.lang = lang
     }
-    public let lang: String
+    public let lang: CKLanguage
     public var style: ForceUpdateViewStyle = .fullscreen1
     public var updateButtonNortmalTitle: String = "Update New Version"
     public var updateButtonSelectedTitle: String = "Update New Version"

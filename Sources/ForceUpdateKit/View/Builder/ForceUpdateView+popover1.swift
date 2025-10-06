@@ -310,7 +310,7 @@ open class ForceUpdateView_Popover1: UIView, ForceUpdateViewProtocol {
 }
 
 open class Popover1ForceUpdateViewConfig: ForceUpdateViewConfig {
-    public override init(lang: String) {
+    public override init(lang: CKLanguage) {
         super.init(lang: lang)
         style = .popover1
         contentViewBackColor = .black

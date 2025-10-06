@@ -16,14 +16,14 @@ final class ForceUpdateViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         let updateModel = UpdateModel(
             id: "test-id",
-            title: [LocalizedText(language: "en", content: "Update Available")],
-            description: [LocalizedText(language: "en", content: "Please update your app")],
+            title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update Available")],
+            description: [LocalizedText(language: CKLanguage.english.rawValue, content: "Please update your app")],
             force: true,
             icon: "update-icon",
             link: "https://apps.apple.com/app/test",
-            button_title: [LocalizedText(language: "en", content: "Update")],
-            cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
-            version: [LocalizedText(language: "en", content: "1.0.0")],
+            button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update")],
+            cancel_button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Cancel")],
+            version: [LocalizedText(language: CKLanguage.english.rawValue, content: "1.0.0")],
             sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
@@ -33,7 +33,7 @@ final class ForceUpdateViewModelTests: XCTestCase {
         viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: mockResponse
         )
@@ -49,7 +49,7 @@ final class ForceUpdateViewModelTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: mockResponse
         )
@@ -64,14 +64,14 @@ final class ForceUpdateViewModelTests: XCTestCase {
         // Given
         let newUpdateModel = UpdateModel(
             id: "new-id",
-            title: [LocalizedText(language: "en", content: "New Update")],
-            description: [LocalizedText(language: "en", content: "New description")],
+            title: [LocalizedText(language: CKLanguage.english.rawValue, content: "New Update")],
+            description: [LocalizedText(language: CKLanguage.english.rawValue, content: "New description")],
             force: true,
             icon: "new-icon",
             link: "https://apps.apple.com/app/new",
-            button_title: [LocalizedText(language: "en", content: "Update")],
-            cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
-            version: [LocalizedText(language: "en", content: "2.0.0")],
+            button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update")],
+            cancel_button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Cancel")],
+            version: [LocalizedText(language: CKLanguage.english.rawValue, content: "2.0.0")],
             sdk_version: "1.0.0",
             minimum_version: "2.0.0",
             maximum_version: "3.0.0",
@@ -108,14 +108,14 @@ final class ForceUpdateViewModelTests: XCTestCase {
         // Given
         let updateModel = UpdateModel(
             id: "test-id",
-            title: [LocalizedText(language: "en", content: "Update Available")],
-            description: [LocalizedText(language: "en", content: "Please update your app")],
+            title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update Available")],
+            description: [LocalizedText(language: CKLanguage.english.rawValue, content: "Please update your app")],
             force: true,
             icon: "update-icon",
             link: nil,
-            button_title: [LocalizedText(language: "en", content: "Update")],
-            cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
-            version: [LocalizedText(language: "en", content: "1.0.0")],
+            button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update")],
+            cancel_button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Cancel")],
+            version: [LocalizedText(language: CKLanguage.english.rawValue, content: "1.0.0")],
             sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
@@ -125,7 +125,7 @@ final class ForceUpdateViewModelTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: response
         )
@@ -142,14 +142,14 @@ final class ForceUpdateViewModelTests: XCTestCase {
         // Given
         let updateModel = UpdateModel(
             id: "test-id",
-            title: [LocalizedText(language: "en", content: "Update Available")],
-            description: [LocalizedText(language: "en", content: "Please update your app")],
+            title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update Available")],
+            description: [LocalizedText(language: CKLanguage.english.rawValue, content: "Please update your app")],
             force: true,
             icon: "update-icon",
             link: "invalid-url",
-            button_title: [LocalizedText(language: "en", content: "Update")],
-            cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
-            version: [LocalizedText(language: "en", content: "1.0.0")],
+            button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update")],
+            cancel_button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Cancel")],
+            version: [LocalizedText(language: CKLanguage.english.rawValue, content: "1.0.0")],
             sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
@@ -159,7 +159,7 @@ final class ForceUpdateViewModelTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: response
         )
@@ -177,7 +177,7 @@ final class ForceUpdateViewModelTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: mockResponse
         )

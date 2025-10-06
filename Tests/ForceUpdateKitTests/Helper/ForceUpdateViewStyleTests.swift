@@ -21,7 +21,7 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     func testGetViewConfigWithStyleFullscreen1() {
         // Given
         let style = ForceUpdateViewStyle.fullscreen1
-        let language = "en"
+        let language = CKLanguage.english
         
         // When
         let config = ForceUpdateViewStyle.getViewConfigWithStyle(style: style, language: language)
@@ -35,7 +35,7 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     func testGetViewConfigWithStyleFullscreen2() {
         // Given
         let style = ForceUpdateViewStyle.fullscreen2
-        let language = "fa"
+        let language = CKLanguage.persian
         
         // When
         let config = ForceUpdateViewStyle.getViewConfigWithStyle(style: style, language: language)
@@ -49,7 +49,7 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     func testGetViewConfigWithStyleFullscreen3() {
         // Given
         let style = ForceUpdateViewStyle.fullscreen3
-        let language = "ar"
+        let language = CKLanguage.arabic
         
         // When
         let config = ForceUpdateViewStyle.getViewConfigWithStyle(style: style, language: language)
@@ -63,7 +63,7 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     func testGetViewConfigWithStyleFullscreen4() {
         // Given
         let style = ForceUpdateViewStyle.fullscreen4
-        let language = "es"
+        let language = CKLanguage.spanish
         
         // When
         let config = ForceUpdateViewStyle.getViewConfigWithStyle(style: style, language: language)
@@ -77,7 +77,7 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     func testGetViewConfigWithStylePopover1() {
         // Given
         let style = ForceUpdateViewStyle.popover1
-        let language = "fr"
+        let language = CKLanguage.french
         
         // When
         let config = ForceUpdateViewStyle.getViewConfigWithStyle(style: style, language: language)
@@ -91,7 +91,7 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     func testGetViewConfigWithStylePopover2() {
         // Given
         let style = ForceUpdateViewStyle.popover2
-        let language = "de"
+        let language = CKLanguage.german
         
         // When
         let config = ForceUpdateViewStyle.getViewConfigWithStyle(style: style, language: language)
@@ -105,7 +105,7 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     func testGetViewConfigWithStyleAllStyles() {
         // Given
         let styles: [ForceUpdateViewStyle] = [.fullscreen1, .fullscreen2, .fullscreen3, .fullscreen4, .popover1, .popover2]
-        let language = "en"
+        let language = CKLanguage.english
         
         // When & Then
         for style in styles {
@@ -119,7 +119,17 @@ final class ForceUpdateViewStyleTests: XCTestCase {
     func testGetViewConfigWithStyleDifferentLanguages() {
         // Given
         let style = ForceUpdateViewStyle.fullscreen1
-        let languages = ["en", "fa", "ar", "es", "fr", "de", "zh", "ja", "ko"]
+        let languages = [
+            CKLanguage.english,
+            CKLanguage.persian,
+            CKLanguage.arabic,
+            CKLanguage.spanish,
+            CKLanguage.french,
+            CKLanguage.german,
+            CKLanguage.chineseSimplified,
+            CKLanguage.japanese,
+            CKLanguage.korean
+        ]
         
         // When & Then
         for language in languages {
@@ -135,11 +145,11 @@ final class ForceUpdateViewStyleTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: UpdateResponse(data: nil)
         )
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         config.style = .fullscreen1
         
         // When
@@ -155,11 +165,11 @@ final class ForceUpdateViewStyleTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: UpdateResponse(data: nil)
         )
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         config.style = .fullscreen2
         
         // When
@@ -175,11 +185,11 @@ final class ForceUpdateViewStyleTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: UpdateResponse(data: nil)
         )
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         config.style = .fullscreen3
         
         // When
@@ -195,11 +205,11 @@ final class ForceUpdateViewStyleTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: UpdateResponse(data: nil)
         )
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         config.style = .fullscreen4
         
         // When
@@ -215,11 +225,11 @@ final class ForceUpdateViewStyleTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: UpdateResponse(data: nil)
         )
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         config.style = .popover1
         
         // When
@@ -235,11 +245,11 @@ final class ForceUpdateViewStyleTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: UpdateResponse(data: nil)
         )
-        let config = ForceUpdateViewConfig(lang: "en")
+        let config = ForceUpdateViewConfig(lang: CKLanguage.english)
         config.style = .popover2
         
         // When
@@ -255,7 +265,7 @@ final class ForceUpdateViewStyleTests: XCTestCase {
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: UpdateServiceConfig(
                 appId: "sdsd",
-                language: "en"
+                language: CKLanguage.english
             ),
             response: UpdateResponse(data: nil)
         )
@@ -263,7 +273,7 @@ final class ForceUpdateViewStyleTests: XCTestCase {
         
         // When & Then
         for style in styles {
-            let config = ForceUpdateViewConfig(lang: "en")
+            let config = ForceUpdateViewConfig(lang: CKLanguage.english)
             config.style = style
             
             let view = ForceUpdateViewStyle.make(viewModel: viewModel, config: config)

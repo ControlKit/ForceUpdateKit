@@ -275,7 +275,7 @@ open class ForceUpdateView_FullScreen1: UIView, ForceUpdateViewProtocol {
 }
 
 open class FullScreen1ForceUpdateViewConfig: ForceUpdateViewConfig {
-    public override init(lang: String) {
+    public override init(lang: CKLanguage) {
         super.init(lang: lang)
         style = .fullscreen1
     }

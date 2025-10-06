@@ -39,7 +39,7 @@ public enum ForceUpdateViewStyle {
         }
     }
     
-    public static func getViewConfigWithStyle(style: ForceUpdateViewStyle, language: String) -> ForceUpdateViewConfig {
+    public static func getViewConfigWithStyle(style: ForceUpdateViewStyle, language: CKLanguage) -> ForceUpdateViewConfig {
         switch style {
         case .fullscreen1:
             FullScreen1ForceUpdateViewConfig(lang: language)

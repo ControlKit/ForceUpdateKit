@@ -55,7 +55,7 @@ final class ForceUpdateKitMainTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en"
+            language: CKLanguage.english
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
@@ -75,7 +75,7 @@ final class ForceUpdateKitMainTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en"
+            language: CKLanguage.english
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = true
@@ -93,7 +93,7 @@ final class ForceUpdateKitMainTests: XCTestCase {
         let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en"
+            language: CKLanguage.english
         )
         mockUpdateService.shouldReturnSuccess = false
         mockUpdateService.shouldReturnNil = false
@@ -117,7 +117,7 @@ final class ForceUpdateKitMainTests: XCTestCase {
             let config = UpdateServiceConfig(
                 style: style,
                 appId: "com.test.app",
-                language: "en"
+                language: CKLanguage.english
             )
             
             await forceUpdateKit.configure(config: config)
@@ -129,7 +129,7 @@ final class ForceUpdateKitMainTests: XCTestCase {
     
     func testConfigureWithDifferentLanguages() async {
         // Given
-        let languages = ["en", "fa", "ar", "es"]
+        let languages = [CKLanguage.english, CKLanguage.persian, CKLanguage.arabic, CKLanguage.spanish]
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
         
@@ -150,10 +150,10 @@ final class ForceUpdateKitMainTests: XCTestCase {
     
     func testConfigureWithCustomRoute() async {
         // Given
-        var config = UpdateServiceConfig(
+        let config = UpdateServiceConfig(
             style: .fullscreen1,
             appId: "com.test.app",
-            language: "en"
+            language: CKLanguage.english
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false

@@ -14,14 +14,14 @@ final class UpdateResponseTests: XCTestCase {
         // Given
         let updateModel = UpdateModel(
             id: "test-id",
-            title: [LocalizedText(language: "en", content: "Update Available")],
-            description: [LocalizedText(language: "en", content: "Please update your app")],
+            title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update Available")],
+            description: [LocalizedText(language: CKLanguage.english.rawValue, content: "Please update your app")],
             force: true,
             icon: "update-icon",
             link: "https://apps.apple.com/app/test",
-            button_title: [LocalizedText(language: "en", content: "Update")],
-            cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
-            version: [LocalizedText(language: "en", content: "1.0.0")],
+            button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update")],
+            cancel_button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Cancel")],
+            version: [LocalizedText(language: CKLanguage.english.rawValue, content: "1.0.0")],
             sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
@@ -51,23 +51,23 @@ final class UpdateResponseTests: XCTestCase {
     
     func testUpdateModelLocalizedText() {
         // Given
-        let localizedText = LocalizedText(language: "fa", content: "به‌روزرسانی موجود است")
+        let localizedText = LocalizedText(language: CKLanguage.persian.rawValue, content: "به‌روزرسانی موجود است")
         
         // When & Then
-        XCTAssertEqual(localizedText.language, "fa")
+        XCTAssertEqual(localizedText.language, CKLanguage.persian.rawValue)
         XCTAssertEqual(localizedText.content, "به‌روزرسانی موجود است")
     }
     
     func testUpdateModelWithMultipleLanguages() {
         // Given
         let title = [
-            LocalizedText(language: "en", content: "Update Available"),
-            LocalizedText(language: "fa", content: "به‌روزرسانی موجود است")
+            LocalizedText(language: CKLanguage.english.rawValue, content: "Update Available"),
+            LocalizedText(language: CKLanguage.persian.rawValue, content: "به‌روزرسانی موجود است")
         ]
         
         let description = [
-            LocalizedText(language: "en", content: "Please update your app"),
-            LocalizedText(language: "fa", content: "لطفاً اپلیکیشن خود را به‌روزرسانی کنید")
+            LocalizedText(language: CKLanguage.english.rawValue, content: "Please update your app"),
+            LocalizedText(language: CKLanguage.persian.rawValue, content: "لطفاً اپلیکیشن خود را به‌روزرسانی کنید")
         ]
         
         // When
@@ -78,9 +78,9 @@ final class UpdateResponseTests: XCTestCase {
             force: true,
             icon: "update-icon",
             link: "https://apps.apple.com/app/test",
-            button_title: [LocalizedText(language: "en", content: "Update")],
-            cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
-            version: [LocalizedText(language: "en", content: "1.0.0")],
+            button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update")],
+            cancel_button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Cancel")],
+            version: [LocalizedText(language: CKLanguage.english.rawValue, content: "1.0.0")],
             sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
@@ -90,22 +90,22 @@ final class UpdateResponseTests: XCTestCase {
         // Then
         XCTAssertEqual(updateModel.title?.count, 2)
         XCTAssertEqual(updateModel.description?.count, 2)
-        XCTAssertEqual(updateModel.title?.first?.language, "en")
-        XCTAssertEqual(updateModel.title?.last?.language, "fa")
+        XCTAssertEqual(updateModel.title?.first?.language, CKLanguage.english.rawValue)
+        XCTAssertEqual(updateModel.title?.last?.language, CKLanguage.persian.rawValue)
     }
     
     func testUpdateResponseCodable() throws {
         // Given
         let updateModel = UpdateModel(
             id: "test-id",
-            title: [LocalizedText(language: "en", content: "Update Available")],
-            description: [LocalizedText(language: "en", content: "Please update your app")],
+            title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update Available")],
+            description: [LocalizedText(language: CKLanguage.english.rawValue, content: "Please update your app")],
             force: true,
             icon: "update-icon",
             link: "https://apps.apple.com/app/test",
-            button_title: [LocalizedText(language: "en", content: "Update")],
-            cancel_button_title: [LocalizedText(language: "en", content: "Cancel")],
-            version: [LocalizedText(language: "en", content: "1.0.0")],
+            button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Update")],
+            cancel_button_title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Cancel")],
+            version: [LocalizedText(language: CKLanguage.english.rawValue, content: "1.0.0")],
             sdk_version: "1.0.0",
             minimum_version: "1.0.0",
             maximum_version: "2.0.0",
