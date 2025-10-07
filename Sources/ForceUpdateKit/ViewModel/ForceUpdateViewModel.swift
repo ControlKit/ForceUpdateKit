@@ -7,22 +7,23 @@
 
 import Foundation
 import UIKit
+import ControlKitBase
 
 public protocol ForceUpdateViewModel: Actionable {
     var response: UpdateResponse { get set }
-    var actionService: ActionServiceProtocol { get set }
+    var actionService: GenericServiceProtocol { get set }
     var serviceConfig: UpdateServiceConfig { get set }
     func openLink()
 }
 
 public final class DefaultForceUpdateViewModel: ForceUpdateViewModel {
     public var serviceConfig: UpdateServiceConfig
-    public var response: UpdateResponse
-    public var actionService: ActionServiceProtocol
+    public var response:UpdateResponse
+    public var actionService: GenericServiceProtocol
     public init(
         serviceConfig: UpdateServiceConfig,
         response: UpdateResponse,
-        actionService: ActionServiceProtocol = ActionService()
+        actionService: GenericServiceProtocol = GenericService()
     ) {
         self.serviceConfig = serviceConfig
         self.response = response

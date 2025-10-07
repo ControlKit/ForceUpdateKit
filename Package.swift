@@ -13,9 +13,16 @@ let package = Package(
             name: "ForceUpdateKit",
             targets: ["ForceUpdateKit"]),
     ],
+    dependencies: [
+        .package(
+            url: "https://github.com/ControlKit/ControlKitBase.git",
+            branch: "main"
+        )
+    ],
     targets: [
         .target(
             name: "ForceUpdateKit",
+            dependencies: ["ControlKitBase"],
             resources: [.process("Resources")]
         ),
         .testTarget(

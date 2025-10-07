@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import ControlKitBase
 @testable import ForceUpdateKit
 
 final class UpdateServiceConfigTests: XCTestCase {
@@ -90,3 +91,4 @@ final class UpdateServiceConfigTests: XCTestCase {
         XCTAssertEqual(config.viewConfig.style, style)
     }
 }
+

@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import ControlKitBase
 @testable import ForceUpdateKit
 
 final class ForceUpdateViewModelTests: XCTestCase {
@@ -187,3 +188,4 @@ final class ForceUpdateViewModelTests: XCTestCase {
         XCTAssertNotNil(viewModel.response)
     }
 }
+

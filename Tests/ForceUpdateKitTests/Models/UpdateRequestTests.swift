@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import ControlKitBase
 @testable import ForceUpdateKit
 
 final class UpdateRequestTests: XCTestCase {
@@ -14,15 +15,13 @@ final class UpdateRequestTests: XCTestCase {
         // Given
         let appId = "com.test.app"
         let version = "1.0.0"
-        let route = "https://api.example.com/update"
         
         // When
-        let request = UpdateRequest(appId: appId, applicationVersion: version, route: route)
+        let request = UpdateRequest(appId: appId, applicationVersion: version)
         
         // Then
         XCTAssertEqual(request.appId, appId)
         XCTAssertEqual(request.applicationVersion, version)
-        XCTAssertEqual(request.route, route)
         XCTAssertFalse(request.deviceUUID.isEmpty)
         XCTAssertEqual(request.sdkVersion, forceUpdateKit_Version)
     }
@@ -31,11 +30,10 @@ final class UpdateRequestTests: XCTestCase {
         // Given
         let appId = "com.test.app"
         let version = "1.0.0"
-        let route = "https://api.example.com/update"
-        let request = UpdateRequest(appId: appId, applicationVersion: version, route: route)
+        let request = UpdateRequest(appId: appId, applicationVersion: version)
         
         // When
-        let dictionary = request.dictionary
+        let dictionary = request.headers
         
         // Then
         XCTAssertEqual(dictionary["x-app-id"], appId)
@@ -49,10 +47,10 @@ final class UpdateRequestTests: XCTestCase {
         let appId = "com.test.app"
         let version = "1.0.0"
         let route = "https://api.example.com/update"
-        let request = UpdateRequest(appId: appId, applicationVersion: version, route: route)
+        let request = UpdateRequest(appId: appId, applicationVersion: version)
         
         // When
-        let nsDictionary = request.nsDictionary
+        let nsDictionary = request.headers
         
         // Then
         XCTAssertEqual(nsDictionary["x-app-id"] as? String, appId)
@@ -64,14 +62,12 @@ final class UpdateRequestTests: XCTestCase {
     func testUpdateRequestDefaultValues() {
         // Given
         let appId = "com.test.app"
-        let route = "https://api.example.com/update"
         
         // When
-        let request = UpdateRequest(appId: appId, route: route)
+        let request = UpdateRequest(appId: appId)
         
         // Then
         XCTAssertEqual(request.appId, appId)
-        XCTAssertEqual(request.route, route)
         XCTAssertEqual(request.applicationVersion, Bundle.main.releaseVersionNumber ?? String())
         XCTAssertFalse(request.deviceUUID.isEmpty)
         XCTAssertEqual(request.sdkVersion, forceUpdateKit_Version)

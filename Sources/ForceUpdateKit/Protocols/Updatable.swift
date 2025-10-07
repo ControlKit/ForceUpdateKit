@@ -6,14 +6,13 @@
 //
 
 import Foundation
-
+import ControlKitBase
 public protocol Updatable: AnyObject {
-    var updateService: UpdateServiceProtocol! { get }
-    func update(request: UpdateRequest) async throws -> UpdateResponse?
+    var updateService: GenericServiceProtocol! { get }
 }
 
 extension Updatable {
-    public func update(request: UpdateRequest) async throws -> UpdateResponse? {
-        return try await updateService.update(request: request)
+    public func update(request: GenericRequest) async throws -> Result<UpdateResponse> {
+        return try await updateService.execute(request: request)
     }
 }

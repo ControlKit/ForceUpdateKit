@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ControlKitBase
 
 open class ForceUpdateView_FullScreen1: UIView, ForceUpdateViewProtocol {
     var config: ForceUpdateViewConfig
@@ -278,21 +279,5 @@ open class FullScreen1ForceUpdateViewConfig: ForceUpdateViewConfig {
     public override init(lang: CKLanguage) {
         super.init(lang: lang)
         style = .fullscreen1
-    }
-}
-
-class ImageHelper {
-    static var resolvedBundle: Bundle {
-#if SWIFT_PACKAGE
-        return Bundle.module
-#else
-        return Bundle(for: self)
-#endif
-    }
-    
-    static func image(_ name: String) -> UIImage? {
-        return UIImage(named: name,
-                       in: resolvedBundle,
-                       compatibleWith: nil)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import ControlKitBase
 @testable import ForceUpdateKit
 
 final class ForceUpdateKitMainTests: XCTestCase {
@@ -178,9 +179,9 @@ final class ForceUpdateKitMainTests: XCTestCase {
     func testUpdateMethod() async throws {
         // Given
         let request = UpdateRequest(
+            route: .force_update,
             appId: "com.test.app",
-            applicationVersion: "1.0.0",
-            route: "https://api.test.com/update"
+            applicationVersion: "1.0.0"
         )
         mockUpdateService.shouldReturnSuccess = true
         mockUpdateService.shouldReturnNil = false
@@ -192,15 +193,15 @@ final class ForceUpdateKitMainTests: XCTestCase {
         XCTAssertNotNil(response)
         XCTAssertEqual(mockUpdateService.lastRequest?.appId, "com.test.app")
         XCTAssertEqual(mockUpdateService.lastRequest?.applicationVersion, "1.0.0")
-        XCTAssertEqual(mockUpdateService.lastRequest?.route, "https://api.test.com/update")
+        XCTAssertEqual(mockUpdateService.lastRequest?.route, .force_update)
     }
     
     func testUpdateMethodWithError() async throws {
         // Given
         let request = UpdateRequest(
+            route: .force_update,
             appId: "com.test.app",
-            applicationVersion: "1.0.0",
-            route: "https://api.test.com/update"
+            applicationVersion: "1.0.0"
         )
         mockUpdateService.shouldReturnSuccess = false
         mockUpdateService.shouldReturnNil = false
@@ -214,3 +215,4 @@ final class ForceUpdateKitMainTests: XCTestCase {
         }
     }
 }
+

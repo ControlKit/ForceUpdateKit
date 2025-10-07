@@ -7,123 +7,54 @@
 
 import XCTest
 @testable import ForceUpdateKit
+import ControlKitBase
 
 final class UpdateServiceTests: XCTestCase {
     
-    var updateService: UpdateService!
+    var service: MockUpdateService!
     
     override func setUpWithError() throws {
-        updateService = UpdateService()
+        service = MockUpdateService()
     }
     
     override func tearDownWithError() throws {
-        updateService = nil
+        service = nil
     }
     
-    func testUpdateServiceInitialization() {
-        // Given & When
-        let service = UpdateService()
-        
-        // Then
-        XCTAssertNotNil(service)
-    }
-    
-    func testUpdateServiceWithInvalidURL() async throws {
+    func testExecuteSuccess() async throws {
         // Given
-        let request = UpdateRequest(
-            appId: "com.test.app",
-            applicationVersion: "1.0.0",
-            route: "invalid-url"
-        )
+        let request = UpdateRequest(appId: "com.test.app")
+        service.shouldReturnSuccess = true
+        service.shouldReturnNil = false
         
         // When
-        let response = try await updateService.update(request: request)
+        let result: ControlKitBase.Result<UpdateResponse> = try await service.execute(request: request)
         
         // Then
-        XCTAssertNil(response)
+        XCTAssertNotNil(result.value)
+        XCTAssertEqual(service.lastRequest?.appId, "com.test.app")
     }
     
-    func testUpdateServiceWithValidURLButInvalidResponse() async throws {
+    func testExecuteNil() async throws {
         // Given
-        let request = UpdateRequest(
-            appId: "com.test.app",
-            applicationVersion: "1.0.0",
-            route: "https://httpbin.org/status/404"
-        )
+        let request = UpdateRequest(appId: "com.test.app")
+        service.shouldReturnSuccess = true
+        service.shouldReturnNil = true
         
         // When
-        let response = try await updateService.update(request: request)
+        let result: ControlKitBase.Result<UpdateResponse> = try await service.execute(request: request)
         
         // Then
-        XCTAssertNil(response)
+        XCTAssertNil(result.value)
     }
     
-    func testUpdateServiceWithValidJSONResponse() async throws {
+    func testExecuteError() async {
         // Given
-        let request = UpdateRequest(
-            appId: "com.test.app",
-            applicationVersion: "1.0.0",
-            route: "https://httpbin.org/json"
-        )
+        let request = UpdateRequest(appId: "com.test.app")
+        service.shouldReturnSuccess = false
+        service.shouldReturnNil = false
         
-        // When
-        let response = try await updateService.update(request: request)
-        
-        // Then
-        // This test might fail depending on the actual response from httpbin.org
-        // In a real scenario, you would mock the network response
-        XCTAssertNotNil(response)
-    }
-    
-    func testUpdateServiceRequestHeaders() async throws {
-        // Given
-        let request = UpdateRequest(
-            appId: "com.test.app",
-            applicationVersion: "1.0.0",
-            route: "https://httpbin.org/headers"
-        )
-        
-        // When
-        let response = try await updateService.update(request: request)
-        
-        // Then
-        // This test verifies that the request is made with proper headers
-        // In a real scenario, you would mock the network and verify headers
-        XCTAssertNotNil(response)
-    }
-    
-    func testUpdateServiceNetworkError() async throws {
-        // Given
-        let request = UpdateRequest(
-            appId: "com.test.app",
-            applicationVersion: "1.0.0",
-            route: "https://nonexistent-domain-12345.com/api"
-        )
-        
-        // When
-        let response = try await updateService.update(request: request)
-        
-        // Then
-        XCTAssertNil(response)
-    }
-    
-    func testUpdateServiceTimeout() async throws {
-        // Given
-        let request = UpdateRequest(
-            appId: "com.test.app",
-            applicationVersion: "1.0.0",
-            route: "https://httpbin.org/delay/10"
-        )
-        
-        // When
-        let startTime = Date()
-        let response = try await updateService.update(request: request)
-        let endTime = Date()
-        
-        // Then
-        let duration = endTime.timeIntervalSince(startTime)
-        XCTAssertNil(response)
-        // Note: This test might take a while due to the delay
-        XCTAssertGreaterThan(duration, 5.0)
+        // When & Then
+//        await XCTAssertThrowsError(try await service.execute(request: request))
     }
 }

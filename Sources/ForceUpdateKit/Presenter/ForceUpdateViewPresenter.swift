@@ -6,6 +6,7 @@
 //
 import Foundation
 import UIKit
+import ControlKitBase
 public struct ForceUpdateViewPresenter {
     var config: ForceUpdateViewConfig
     public init(data: UpdateModel?, config: ForceUpdateViewConfig) {

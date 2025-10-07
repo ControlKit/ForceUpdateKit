@@ -6,21 +6,26 @@
 //
 
 import Foundation
-public struct UpdateRequest {
+import ControlKitBase
+public struct UpdateRequest: GenericRequest {
+    public var route: ControlKitItem = .force_update
+    public var itemId: String?
+    public var extraParameter: String?
+    public var httpMethod: HTTPMethod = .get
     public var appId: String
+    
     public var applicationVersion: String = Bundle.main.releaseVersionNumber ?? String()
-    public var route: String = "https://tauri.ir/api/force-updates/"
     public var deviceUUID: String = UUID().uuidString
     public var sdkVersion: String = forceUpdateKit_Version
     
-    var dictionary: [String: String] {
+    public var headers: [String: String] {
         return ["x-app-id": appId,
                 "x-version": applicationVersion,
                 "x-sdk-version": sdkVersion,
                 "x-device-uuid": deviceUUID]
     }
     
-    var nsDictionary: NSDictionary {
-        return dictionary as NSDictionary
+    public var body: [String : String] {
+        return [:]
     }
 }

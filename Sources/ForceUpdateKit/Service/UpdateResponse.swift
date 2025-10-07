@@ -6,9 +6,7 @@
 //
 
 import Foundation
-
-public typealias LocalString = [LocalizedText]
-
+import ControlKitBase
 public struct UpdateResponse: Codable {
     public var data: UpdateModel?
 }
@@ -27,8 +25,3 @@ public struct UpdateModel: Codable {
     public let maximum_version: String?
     public let created_at: String?
 }
-public struct LocalizedText: Codable {
-    public let language: String?
-    public let content: String?
-}
-

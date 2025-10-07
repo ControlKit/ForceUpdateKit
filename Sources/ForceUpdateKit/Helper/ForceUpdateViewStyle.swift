@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import ControlKitBase
 public enum ForceUpdateViewStyle {
     case fullscreen1
     case fullscreen2
@@ -42,17 +42,17 @@ public enum ForceUpdateViewStyle {
     public static func getViewConfigWithStyle(style: ForceUpdateViewStyle, language: CKLanguage) -> ForceUpdateViewConfig {
         switch style {
         case .fullscreen1:
-            FullScreen1ForceUpdateViewConfig(lang: language)
+            return FullScreen1ForceUpdateViewConfig(lang: language)
         case .fullscreen2:
-            FullScreen2ForceUpdateViewConfig(lang: language)
+            return FullScreen2ForceUpdateViewConfig(lang: language)
         case .fullscreen3:
-            FullScreen3ForceUpdateViewConfig(lang: language)
+            return FullScreen3ForceUpdateViewConfig(lang: language)
         case .fullscreen4:
-            FullScreen4ForceUpdateViewConfig(lang: language)
+            return FullScreen4ForceUpdateViewConfig(lang: language)
         case .popover1:
-            Popover1ForceUpdateViewConfig(lang: language)
+            return Popover1ForceUpdateViewConfig(lang: language)
         case .popover2:
-            Popover2ForceUpdateViewConfig(lang: language)
+            return Popover2ForceUpdateViewConfig(lang: language)
         }
     }
 }

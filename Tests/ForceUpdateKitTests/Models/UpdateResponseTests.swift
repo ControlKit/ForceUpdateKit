@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import ControlKitBase
 @testable import ForceUpdateKit
 
 final class UpdateResponseTests: XCTestCase {
@@ -124,3 +125,4 @@ final class UpdateResponseTests: XCTestCase {
         XCTAssertEqual(decodedResponse.data?.sdk_version, response.data?.sdk_version)
     }
 }
+

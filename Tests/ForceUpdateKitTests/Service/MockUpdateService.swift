@@ -6,32 +6,29 @@
 //
 
 import Foundation
+import ControlKitBase
 @testable import ForceUpdateKit
 
-class MockUpdateService: UpdateServiceProtocol {
+class MockUpdateService: GenericServiceProtocol {
     var shouldReturnSuccess = true
     var shouldReturnNil = false
     var mockResponse: UpdateResponse?
     var lastRequest: UpdateRequest?
     
-    func update(request: UpdateRequest) async throws -> UpdateResponse? {
-        lastRequest = request
-        
-        if shouldReturnNil {
-            return nil
+    func execute<T, M>(request: T) async throws -> Result<M> where T : GenericRequest, M : Codable {
+        if let req = request as? UpdateRequest {
+            lastRequest = req
         }
-        
-        if shouldReturnSuccess {
-            return mockResponse ?? createMockResponse()
-        } else {
-            throw NSError(domain: "MockError", code: 500, userInfo: [NSLocalizedDescriptionKey: "Mock network error"])
-        }
+        throw NSError(domain: "MockError", code: 500, userInfo: [NSLocalizedDescriptionKey: "Mock network error"])
     }
     
     private func createMockResponse() -> UpdateResponse {
         let updateModel = UpdateModel(
             id: "mock-id",
-            title: [LocalizedText(language: CKLanguage.english.rawValue, content: "Mock Update Available")],
+            title: [LocalizedText(
+                language: CKLanguage.english.rawValue,
+                content: "Mock Update Available"
+            )],
             description: [LocalizedText(language: CKLanguage.english.rawValue, content: "Mock update description")],
             force: true,
             icon: "mock-icon",

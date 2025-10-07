@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ControlKitBase
 public struct UpdateServiceConfig {
     public init(style: ForceUpdateViewStyle = .fullscreen1,
                 appId: String,

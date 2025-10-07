@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ControlKitBase
 open class ForceUpdateViewConfig {
     public init(lang: CKLanguage) {
         self.lang = lang

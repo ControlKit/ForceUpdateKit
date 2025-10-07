@@ -239,3 +239,4 @@ final class ExtensionsTests: XCTestCase {
         XCTAssertNotNil(buildNumber)
     }
 }
+

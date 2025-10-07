@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import ControlKitBase
 @testable import ForceUpdateKit
 
 final class ForceUpdateViewStyleTests: XCTestCase {
@@ -282,3 +283,4 @@ final class ForceUpdateViewStyleTests: XCTestCase {
         }
     }
 }
+

@@ -118,3 +118,4 @@ xcodebuild test -scheme ForceUpdateKit -destination 'platform=iOS Simulator,name
 3. تست‌های unit و integration را جدا کنید
 4. Mock objects را برای network calls استفاده کنید
 5. Documentation را به‌روزرسانی کنید
+

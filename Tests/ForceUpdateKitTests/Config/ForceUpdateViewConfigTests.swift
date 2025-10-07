@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import ControlKitBase
 @testable import ForceUpdateKit
 
 final class ForceUpdateViewConfigTests: XCTestCase {
@@ -182,3 +183,4 @@ final class ForceUpdateViewConfigTests: XCTestCase {
         XCTAssertEqual(ImageType.gear.rawValue, "gear")
     }
 }
+

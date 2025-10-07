@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ControlKitBase
 
 open class ForceUpdateView_FullScreen3: UIView, ForceUpdateViewProtocol {
     var config: ForceUpdateViewConfig
