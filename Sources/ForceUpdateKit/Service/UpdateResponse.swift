@@ -20,12 +20,10 @@ public struct UpdateModel: Codable {
     public let button_title: LocalString?
     public let cancel_button_title: LocalString?
     public let version: LocalString?
-    public let status: Status?
     public let sdk_version: String?
     public let minimum_version: String?
     public let maximum_version: String?
     public let created_at: String?
-    public let updated_at: String?
 }
 
 public struct Status: Codable {
