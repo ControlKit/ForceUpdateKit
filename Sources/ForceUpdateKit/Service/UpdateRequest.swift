@@ -15,7 +15,7 @@ public struct UpdateRequest: GenericRequest {
     public var appId: String
     
     public var applicationVersion: String = Bundle.main.releaseVersionNumber ?? String()
-    public var deviceUUID: String = UUID().uuidString
+    public var deviceUUID: String = CKDeviceUUID
     public var sdkVersion: String = forceUpdateKit_Version
     
     public var headers: [String: String] {
