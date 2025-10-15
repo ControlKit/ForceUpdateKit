@@ -15,8 +15,7 @@ public class ForceUpdateKit: Updatable {
     @MainActor
     public func configure(config: UpdateServiceConfig) async {
         Task {
-            let request = UpdateRequest(appId: config.appId,
-                                        applicationVersion: config.version)
+            let request = UpdateRequest(appId: config.appId)
             let response = try await self.update(request: request)
             guard let res = response.value else { return }
             let viewModel = DefaultForceUpdateViewModel(

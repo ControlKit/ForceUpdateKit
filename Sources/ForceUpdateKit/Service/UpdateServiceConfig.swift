@@ -17,6 +17,5 @@ public struct UpdateServiceConfig {
     }
     public var appId: String
     public var language: CKLanguage
-    public var version: String = Bundle.main.releaseVersionNumber ?? String()
     public var viewConfig: ForceUpdateViewConfig
 }
