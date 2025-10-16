@@ -76,7 +76,7 @@ public class ForceUpdateKit: Updatable {
         guard let res = response.value else { return }
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: config,
-            response: response
+            response: res
         )
         if response.value?.data != nil {
             DispatchQueue.main.async {

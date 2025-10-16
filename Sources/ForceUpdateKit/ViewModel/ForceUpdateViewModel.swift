@@ -18,7 +18,7 @@ public protocol ForceUpdateViewModel: Actionable {
 
 public final class DefaultForceUpdateViewModel: ForceUpdateViewModel {
     public var serviceConfig: UpdateServiceConfig
-    public var response:UpdateResponse
+    public var response: UpdateResponse
     public var actionService: GenericServiceProtocol
     public init(
         serviceConfig: UpdateServiceConfig,
