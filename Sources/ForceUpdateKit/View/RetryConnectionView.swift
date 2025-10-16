@@ -13,7 +13,7 @@ public class RetryConnectionView: UIView {
     
     private var retryAction: (() -> Void)?
     private var dismissAction: (() -> Void)?
-    private var config: ForceUpdateViewConfig
+    var config: ForceUpdateViewConfig
     
     private lazy var backgroundView: UIView = {
         let view = UIView()

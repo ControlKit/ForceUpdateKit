@@ -75,7 +75,7 @@ public class ForceUpdateKit: AnyObject, Updatable {
                 // User chose to dismiss
             }
         )
-        
+        retryView?.config = config.viewConfig
         retryView?.show(in: window)
     }
     
