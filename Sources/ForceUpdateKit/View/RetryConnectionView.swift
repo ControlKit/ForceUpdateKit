@@ -140,7 +140,6 @@ public class RetryConnectionView: UIView {
     }
     
     @objc private func retryButtonTapped() {
-        print("retryButtonTapped called")
         retryAction?()
     }
     

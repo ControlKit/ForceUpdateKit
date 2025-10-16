@@ -11,7 +11,7 @@ public class ForceUpdateKit: AnyObject, Updatable {
     public let updateService: GenericServiceProtocol!
     private var retryView: RetryConnectionView?
     private var currentConfig: UpdateServiceConfig?
-    private var currentMaxRetries: Int = 0
+    private var currentMaxRetries: Int = 5
     private var currentRetryCount: Int = 0
     private static var sharedInstance: ForceUpdateKit?
     
@@ -20,8 +20,7 @@ public class ForceUpdateKit: AnyObject, Updatable {
         ForceUpdateKit.sharedInstance = self
     }
     @MainActor
-    public func configure(config: UpdateServiceConfig, maxRetries: Int = 0) async {
-        // Store configuration for retry mechanism
+    public func configure(config: UpdateServiceConfig, maxRetries: Int = 5) async {
         self.currentConfig = config
         self.currentMaxRetries = maxRetries
         self.currentRetryCount = 0
@@ -31,27 +30,20 @@ public class ForceUpdateKit: AnyObject, Updatable {
     
     @MainActor
     private func configureWithRetry() async {
-        print("configureWithRetry called")
         guard let config = currentConfig else { 
-            print("No current config available")
             return 
         }
         
-        print("Making request with appId: \(config.appId)")
         let request = UpdateRequest(appId: config.appId)
         
         do {
             let response = try await self.update(request: request)
-            print("Response received, isSuccess: \(response.isSuccess)")
             if response.isSuccess {
-                print("Success response, showing force update view")
                 successResponse(config: config, response: response)
             } else {
-                print("Failed response, showing retry view")
                 showRetryView()
             }
         } catch {
-            print("Error occurred: \(error)")
             showRetryView()
         }
     }
@@ -59,34 +51,20 @@ public class ForceUpdateKit: AnyObject, Updatable {
     private func showRetryView() {
         guard let window = UIApplication.shared.windows.last,
               let config = currentConfig else { return }
-        
-        // Hide previous retry view if exists
         retryView?.hide()
-        
         retryView = RetryConnectionView(
             config: config.viewConfig,
             retryAction: {
-                print("Retry button tapped!")
                 guard let sharedInstance = ForceUpdateKit.sharedInstance else {
-                    print("Shared instance is nil!")
                     return
                 }
-                print("Shared instance is available, current retry count: \(sharedInstance.currentRetryCount)")
                 
                 Task { @MainActor in
-                    // Hide retry view before making new request
                     sharedInstance.retryView?.hide()
-                    
-                    // Increment retry count
                     sharedInstance.currentRetryCount += 1
-                    print("Incremented retry count to: \(sharedInstance.currentRetryCount)")
-                    
-                    if sharedInstance.currentRetryCount <= sharedInstance.currentMaxRetries || sharedInstance.currentMaxRetries == 0 {
-                        print("Making retry request...")
+                    if sharedInstance.currentRetryCount <= sharedInstance.currentMaxRetries {
                         await sharedInstance.configureWithRetry()
                     } else {
-                        print("Max retries reached!")
-                        // Max retries reached, show error or dismiss
                         sharedInstance.showMaxRetriesReached()
                     }
                 }
@@ -116,9 +94,7 @@ public class ForceUpdateKit: AnyObject, Updatable {
     }
     
     private func successResponse(config: UpdateServiceConfig, response: Result<UpdateResponse>) {
-        // Hide retry view if exists
         retryView?.hide()
-        
         guard let res = response.value else { return }
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: config,
