@@ -7,19 +7,30 @@ import ControlKitBase
 
 public let forceUpdateKit_Version: String = "1.0.0"
 
-public class ForceUpdateKit:AnyObject, Updatable {
+public class ForceUpdateKit: AnyObject, Updatable {
     public let updateService: GenericServiceProtocol!
+    private var retryView: RetryConnectionView?
+    private var currentConfig: UpdateServiceConfig?
+    private var currentMaxRetries: Int = 0
+    private var currentRetryCount: Int = 0
+    
     public init(updateService: GenericServiceProtocol = GenericService()) {
         self.updateService = updateService
     }
-    var retryView: RetryConnectionView?
     @MainActor
     public func configure(config: UpdateServiceConfig, maxRetries: Int = 0) async {
-        await configureWithRetry(config: config, maxRetries: maxRetries)
+        // Store configuration for retry mechanism
+        self.currentConfig = config
+        self.currentMaxRetries = maxRetries
+        self.currentRetryCount = 0
+        
+        await configureWithRetry()
     }
     
     @MainActor
-    private func configureWithRetry(config: UpdateServiceConfig, maxRetries: Int, currentRetry: Int = 0) async {
+    private func configureWithRetry() async {
+        guard let config = currentConfig else { return }
+        
         let request = UpdateRequest(appId: config.appId)
         
         do {
@@ -27,15 +38,16 @@ public class ForceUpdateKit:AnyObject, Updatable {
             if response.isSuccess {
                 successReponse(config: config, response: response)
             } else {
-                showRetryView(config: config, maxRetries: maxRetries, currentRetry: currentRetry)
+                showRetryView()
             }
         } catch {
-            showRetryView(config: config, maxRetries: maxRetries, currentRetry: currentRetry)
+            showRetryView()
         }
     }
     
-    private func showRetryView(config: UpdateServiceConfig, maxRetries: Int, currentRetry: Int) {
-        guard let window = UIApplication.shared.windows.last else { return }
+    private func showRetryView() {
+        guard let window = UIApplication.shared.windows.last,
+              let config = currentConfig else { return }
         
         // Hide previous retry view if exists
         retryView?.hide()
@@ -48,8 +60,11 @@ public class ForceUpdateKit:AnyObject, Updatable {
                     // Hide retry view before making new request
                     self.retryView?.hide()
                     
-                    if currentRetry < maxRetries || maxRetries == 0 {
-                        await self.configureWithRetry(config: config, maxRetries: maxRetries, currentRetry: currentRetry + 1)
+                    // Increment retry count
+                    self.currentRetryCount += 1
+                    
+                    if self.currentRetryCount <= self.currentMaxRetries || self.currentMaxRetries == 0 {
+                        await self.configureWithRetry()
                     } else {
                         // Max retries reached, show error or dismiss
                         self.showMaxRetriesReached()
