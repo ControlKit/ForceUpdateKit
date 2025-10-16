@@ -12,6 +12,7 @@ public class ForceUpdateKit:AnyObject, Updatable {
     public init(updateService: GenericServiceProtocol = GenericService()) {
         self.updateService = updateService
     }
+    var retryView: RetryConnectionView?
     @MainActor
     public func configure(config: UpdateServiceConfig, maxRetries: Int = 0) async {
         await configureWithRetry(config: config, maxRetries: maxRetries)
@@ -36,7 +37,7 @@ public class ForceUpdateKit:AnyObject, Updatable {
     private func showRetryView(config: UpdateServiceConfig, maxRetries: Int, currentRetry: Int) {
         guard let window = UIApplication.shared.windows.last else { return }
         
-        let retryView = RetryConnectionView(
+        retryView = RetryConnectionView(
             config: config.viewConfig,
             retryAction: { [weak self] in
                 Task { @MainActor in
@@ -54,7 +55,7 @@ public class ForceUpdateKit:AnyObject, Updatable {
             }
         )
         
-        retryView.show(in: window)
+        retryView?.show(in: window)
     }
     
     private func showMaxRetriesReached() {
