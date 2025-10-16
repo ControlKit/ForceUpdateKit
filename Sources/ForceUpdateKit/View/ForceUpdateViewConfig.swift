@@ -40,6 +40,31 @@ open class ForceUpdateViewConfig {
     public var updateButtonCornerRadius: CGFloat = 20.0
     public var updateButtonBorderWidth: CGFloat = 0.0
     public var updateButtonBorderColor: UIColor = .clear
+    
+    // Retry Connection View Properties
+    public var retryBackgroundColor: UIColor = UIColor.black.withAlphaComponent(0.7)
+    public var retryContainerBackgroundColor: UIColor = .white
+    public var retryContainerCornerRadius: CGFloat = 16.0
+    public var retryIconColor: UIColor = .systemRed
+    public var retryTitleText: String = "Connection Error"
+    public var retryTitleFont: UIFont = UIFont.systemFont(ofSize: 18, weight: .bold)
+    public var retryTitleColor: UIColor = .black
+    public var retryMessageText: String = "Please check your internet connection and try again"
+    public var retryMessageFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .regular)
+    public var retryMessageColor: UIColor = .gray
+    public var retryButtonTitle: String = "Retry"
+    public var retryButtonBackgroundColor: UIColor = .systemBlue
+    public var retryButtonTitleColor: UIColor = .white
+    public var retryButtonCornerRadius: CGFloat = 8.0
+    public var retryButtonFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .medium)
+    public var dismissButtonTitle: String = "Dismiss"
+    public var dismissButtonTitleColor: UIColor = .systemBlue
+    public var dismissButtonFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .medium)
+    
+    // Retry Connection View Icon Properties
+    public var retryIconName: String = "no-wifi1"
+    public var retryIconImage: UIImage?
+    public var retryIconSize: CGSize = CGSize(width: 64, height: 64)
 }
 
 public enum ImageType: String {
