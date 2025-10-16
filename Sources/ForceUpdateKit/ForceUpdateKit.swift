@@ -37,16 +37,22 @@ public class ForceUpdateKit:AnyObject, Updatable {
     private func showRetryView(config: UpdateServiceConfig, maxRetries: Int, currentRetry: Int) {
         guard let window = UIApplication.shared.windows.last else { return }
         
+        // Hide previous retry view if exists
+        retryView?.hide()
+        
         retryView = RetryConnectionView(
             config: config.viewConfig,
             retryAction: { [weak self] in
+                guard let self = self else { return }
                 Task { @MainActor in
-                    if currentRetry < maxRetries ||
-                        maxRetries == 0 {
-                        await self?.configureWithRetry(config: config, maxRetries: maxRetries, currentRetry: currentRetry + 1)
+                    // Hide retry view before making new request
+                    self.retryView?.hide()
+                    
+                    if currentRetry < maxRetries || maxRetries == 0 {
+                        await self.configureWithRetry(config: config, maxRetries: maxRetries, currentRetry: currentRetry + 1)
                     } else {
                         // Max retries reached, show error or dismiss
-                        self?.showMaxRetriesReached()
+                        self.showMaxRetriesReached()
                     }
                 }
             },
@@ -75,10 +81,13 @@ public class ForceUpdateKit:AnyObject, Updatable {
     }
     
     private func successReponse(config: UpdateServiceConfig, response: Result<UpdateResponse>) {
+        // Hide retry view if exists
+        retryView?.hide()
+        
         guard let res = response.value else { return }
         let viewModel = DefaultForceUpdateViewModel(
             serviceConfig: config,
-            response: res
+            response: response
         )
         if response.value?.data != nil {
             DispatchQueue.main.async {
