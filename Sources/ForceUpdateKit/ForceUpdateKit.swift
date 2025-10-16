@@ -13,9 +13,11 @@ public class ForceUpdateKit: AnyObject, Updatable {
     private var currentConfig: UpdateServiceConfig?
     private var currentMaxRetries: Int = 0
     private var currentRetryCount: Int = 0
+    private static var sharedInstance: ForceUpdateKit?
     
     public init(updateService: GenericServiceProtocol = GenericService()) {
         self.updateService = updateService
+        ForceUpdateKit.sharedInstance = self
     }
     @MainActor
     public func configure(config: UpdateServiceConfig, maxRetries: Int = 0) async {
@@ -63,29 +65,29 @@ public class ForceUpdateKit: AnyObject, Updatable {
         
         retryView = RetryConnectionView(
             config: config.viewConfig,
-            retryAction: { [weak self] in
+            retryAction: {
                 print("Retry button tapped!")
-                guard let strongSelf = self else {
-                    print("Self is nil in retry action!")
+                guard let sharedInstance = ForceUpdateKit.sharedInstance else {
+                    print("Shared instance is nil!")
                     return
                 }
-                print("Self is available, current retry count: \(strongSelf.currentRetryCount)")
+                print("Shared instance is available, current retry count: \(sharedInstance.currentRetryCount)")
                 
                 Task { @MainActor in
                     // Hide retry view before making new request
-                    strongSelf.retryView?.hide()
+                    sharedInstance.retryView?.hide()
                     
                     // Increment retry count
-                    strongSelf.currentRetryCount += 1
-                    print("Incremented retry count to: \(strongSelf.currentRetryCount)")
+                    sharedInstance.currentRetryCount += 1
+                    print("Incremented retry count to: \(sharedInstance.currentRetryCount)")
                     
-                    if strongSelf.currentRetryCount <= strongSelf.currentMaxRetries || strongSelf.currentMaxRetries == 0 {
+                    if sharedInstance.currentRetryCount <= sharedInstance.currentMaxRetries || sharedInstance.currentMaxRetries == 0 {
                         print("Making retry request...")
-                        await strongSelf.configureWithRetry()
+                        await sharedInstance.configureWithRetry()
                     } else {
                         print("Max retries reached!")
                         // Max retries reached, show error or dismiss
-                        strongSelf.showMaxRetriesReached()
+                        sharedInstance.showMaxRetriesReached()
                     }
                 }
             },
