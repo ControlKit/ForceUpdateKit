@@ -117,22 +117,22 @@ public class RetryConnectionView: UIView {
             
             // Icon - Center vertically
             iconImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            iconImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: -100),
+            iconImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: -200),
             iconImageView.widthAnchor.constraint(equalToConstant: config.retryIconSize.width),
             iconImageView.heightAnchor.constraint(equalToConstant: config.retryIconSize.height),
             
             // Title
-            titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 32),
+            titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 45),
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32),
             titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32),
             
             // Message
-            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 18),
             messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32),
             messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32),
             
             // Retry button
-            retryButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 48),
+            retryButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 60),
             retryButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32),
             retryButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32),
             retryButton.heightAnchor.constraint(equalToConstant: 56)

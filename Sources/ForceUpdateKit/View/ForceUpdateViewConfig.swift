@@ -45,18 +45,18 @@ open class ForceUpdateViewConfig {
     public var retryBackgroundColor: UIColor = UIColor.black.withAlphaComponent(0.7)
     public var retryContainerBackgroundColor: UIColor = .white
     public var retryContainerCornerRadius: CGFloat = 16.0
-    public var retryIconColor: UIColor = .systemRed
+    public var retryIconColor: UIColor = UIColor(r: 83, g: 82, b: 82)
     public var retryTitleText: String = "Connection Error"
-    public var retryTitleFont: UIFont = UIFont.systemFont(ofSize: 18, weight: .bold)
-    public var retryTitleColor: UIColor = .black
+    public var retryTitleFont: UIFont = UIFont.systemFont(ofSize: 24, weight: .semibold)
+    public var retryTitleColor: UIColor = UIColor(r: 84, g: 84, b: 84)
     public var retryMessageText: String = "Please check your internet connection and try again"
-    public var retryMessageFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .regular)
-    public var retryMessageColor: UIColor = .gray
+    public var retryMessageFont: UIFont = UIFont.systemFont(ofSize: 18, weight: .regular)
+    public var retryMessageColor: UIColor = UIColor(r: 84, g: 84, b: 84)
     public var retryButtonTitle: String = "Retry"
-    public var retryButtonBackgroundColor: UIColor = .systemBlue
+    public var retryButtonBackgroundColor: UIColor = UIColor(r: 145, g: 145, b: 145)
     public var retryButtonTitleColor: UIColor = .white
-    public var retryButtonCornerRadius: CGFloat = 8.0
-    public var retryButtonFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .medium)
+    public var retryButtonCornerRadius: CGFloat = 10.0
+    public var retryButtonFont: UIFont = UIFont.systemFont(ofSize: 18, weight: .semibold)
     
     // Retry Connection View Icon Properties
     public var retryIconName: String = "no-wifi1"
