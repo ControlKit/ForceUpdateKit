@@ -7,14 +7,14 @@ import ControlKitBase
 
 public let forceUpdateKit_Version: String = "1.0.0"
 
-public class ForceUpdateKit: Updatable {
+public class ForceUpdateKit:AnyObject, Updatable {
     public let updateService: GenericServiceProtocol!
     public init(updateService: GenericServiceProtocol = GenericService()) {
         self.updateService = updateService
     }
     @MainActor
-    public func configure(config: UpdateServiceConfig) async {
-        await configureWithRetry(config: config, maxRetries: 3)
+    public func configure(config: UpdateServiceConfig, maxRetries: Int = 0) async {
+        await configureWithRetry(config: config, maxRetries: maxRetries)
     }
     
     @MainActor
@@ -40,7 +40,8 @@ public class ForceUpdateKit: Updatable {
             config: config.viewConfig,
             retryAction: { [weak self] in
                 Task { @MainActor in
-                    if currentRetry < maxRetries {
+                    if currentRetry < maxRetries ||
+                        maxRetries == 0 {
                         await self?.configureWithRetry(config: config, maxRetries: maxRetries, currentRetry: currentRetry + 1)
                     } else {
                         // Max retries reached, show error or dismiss
