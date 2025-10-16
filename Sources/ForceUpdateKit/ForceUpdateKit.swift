@@ -78,15 +78,16 @@ public class ForceUpdateKit: AnyObject, Updatable {
     }
     
     private func showMaxRetriesReached() {
-        guard let window = UIApplication.shared.windows.last else { return }
+        guard let window = UIApplication.shared.windows.last,
+              let config = currentConfig else { return }
         
         let alert = UIAlertController(
-            title: "Connection Error",
-            message: "Unable to connect to server. Please try again later.",
+            title: config.viewConfig.maxRetriesAlertTitle,
+            message: config.viewConfig.maxRetriesAlertMessage,
             preferredStyle: .alert
         )
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: config.viewConfig.maxRetriesAlertButtonTitle, style: .default))
         
         if let topViewController = window.rootViewController {
             topViewController.present(alert, animated: true)

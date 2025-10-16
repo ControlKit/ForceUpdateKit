@@ -62,6 +62,11 @@ open class ForceUpdateViewConfig {
     public var retryIconName: String = "no-wifi1"
     public var retryIconImage: UIImage?
     public var retryIconSize: CGSize = CGSize(width: 64, height: 64)
+    
+    // Max Retries Reached Alert Properties
+    public var maxRetriesAlertTitle: String = "Connection Error"
+    public var maxRetriesAlertMessage: String = "Unable to connect to server. Please try again later."
+    public var maxRetriesAlertButtonTitle: String = "OK"
 }
 
 public enum ImageType: String {
