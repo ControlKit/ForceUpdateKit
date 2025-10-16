@@ -17,15 +17,13 @@ public class RetryConnectionView: UIView {
     
     private lazy var backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = config.retryBackgroundColor
+        view.backgroundColor = config.retryContainerBackgroundColor
         return view
     }()
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = config.retryContainerBackgroundColor
-        view.layer.cornerRadius = config.retryContainerCornerRadius
-        view.layer.masksToBounds = true
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -71,15 +69,6 @@ public class RetryConnectionView: UIView {
         return button
     }()
     
-    private lazy var dismissButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(config.dismissButtonTitle, for: .normal)
-        button.setTitleColor(config.dismissButtonTitleColor, for: .normal)
-        button.backgroundColor = .clear
-        button.titleLabel?.font = config.dismissButtonFont
-        button.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
-        return button
-    }()
     
     public init(config: ForceUpdateViewConfig, retryAction: @escaping () -> Void, dismissAction: (() -> Void)? = nil) {
         self.config = config
@@ -101,7 +90,6 @@ public class RetryConnectionView: UIView {
         containerView.addSubview(titleLabel)
         containerView.addSubview(messageLabel)
         containerView.addSubview(retryButton)
-        containerView.addSubview(dismissButton)
         
         setupConstraints()
     }
@@ -113,7 +101,6 @@ public class RetryConnectionView: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         retryButton.translatesAutoresizingMaskIntoConstraints = false
-        dismissButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             // Background view
@@ -122,40 +109,33 @@ public class RetryConnectionView: UIView {
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            // Container view
-            containerView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            containerView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
+            // Container view - Full screen
+            containerView.topAnchor.constraint(equalTo: topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            // Icon
-            iconImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
+            // Icon - Center vertically
             iconImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            iconImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: -100),
             iconImageView.widthAnchor.constraint(equalToConstant: config.retryIconSize.width),
             iconImageView.heightAnchor.constraint(equalToConstant: config.retryIconSize.height),
             
             // Title
-            titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            titleLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 32),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32),
+            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32),
             
             // Message
-            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32),
+            messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32),
             
             // Retry button
-            retryButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 24),
-            retryButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            retryButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-            retryButton.heightAnchor.constraint(equalToConstant: 44),
-            
-            // Dismiss button
-            dismissButton.topAnchor.constraint(equalTo: retryButton.bottomAnchor, constant: 8),
-            dismissButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            dismissButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-            dismissButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16),
-            dismissButton.heightAnchor.constraint(equalToConstant: 44)
+            retryButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 48),
+            retryButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32),
+            retryButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32),
+            retryButton.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
     
@@ -163,10 +143,6 @@ public class RetryConnectionView: UIView {
         retryAction?()
     }
     
-    @objc private func dismissButtonTapped() {
-        dismissAction?()
-        removeFromSuperview()
-    }
     
     public func show(in view: UIView) {
         view.addSubview(self)
@@ -178,20 +154,17 @@ public class RetryConnectionView: UIView {
             bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        // Animation
+        // Animation - Fade in
         alpha = 0
-        containerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
             self.alpha = 1
-            self.containerView.transform = .identity
         }
     }
     
     public func hide() {
         UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 0
-            self.containerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         }) { _ in
             self.removeFromSuperview()
         }

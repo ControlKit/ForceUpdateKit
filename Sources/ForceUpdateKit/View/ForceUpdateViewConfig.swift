@@ -57,9 +57,6 @@ open class ForceUpdateViewConfig {
     public var retryButtonTitleColor: UIColor = .white
     public var retryButtonCornerRadius: CGFloat = 8.0
     public var retryButtonFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .medium)
-    public var dismissButtonTitle: String = "Dismiss"
-    public var dismissButtonTitleColor: UIColor = .systemBlue
-    public var dismissButtonFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .medium)
     
     // Retry Connection View Icon Properties
     public var retryIconName: String = "no-wifi1"
