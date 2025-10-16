@@ -29,18 +29,27 @@ public class ForceUpdateKit: AnyObject, Updatable {
     
     @MainActor
     private func configureWithRetry() async {
-        guard let config = currentConfig else { return }
+        print("configureWithRetry called")
+        guard let config = currentConfig else { 
+            print("No current config available")
+            return 
+        }
         
+        print("Making request with appId: \(config.appId)")
         let request = UpdateRequest(appId: config.appId)
         
         do {
             let response = try await self.update(request: request)
+            print("Response received, isSuccess: \(response.isSuccess)")
             if response.isSuccess {
+                print("Success response, showing force update view")
                 successReponse(config: config, response: response)
             } else {
+                print("Failed response, showing retry view")
                 showRetryView()
             }
         } catch {
+            print("Error occurred: \(error)")
             showRetryView()
         }
     }
@@ -55,17 +64,26 @@ public class ForceUpdateKit: AnyObject, Updatable {
         retryView = RetryConnectionView(
             config: config.viewConfig,
             retryAction: { [weak self] in
-                guard let self = self else { return }
+                print("Retry button tapped!")
+                guard let self = self else { 
+                    print("Self is nil!")
+                    return 
+                }
+                print("Self is available, current retry count: \(self.currentRetryCount)")
+                
                 Task { @MainActor in
                     // Hide retry view before making new request
                     self.retryView?.hide()
                     
                     // Increment retry count
                     self.currentRetryCount += 1
+                    print("Incremented retry count to: \(self.currentRetryCount)")
                     
                     if self.currentRetryCount <= self.currentMaxRetries || self.currentMaxRetries == 0 {
+                        print("Making retry request...")
                         await self.configureWithRetry()
                     } else {
+                        print("Max retries reached!")
                         // Max retries reached, show error or dismiss
                         self.showMaxRetriesReached()
                     }
@@ -75,7 +93,7 @@ public class ForceUpdateKit: AnyObject, Updatable {
                 // User chose to dismiss
             }
         )
-        retryView?.config = config.viewConfig
+        
         retryView?.show(in: window)
     }
     
