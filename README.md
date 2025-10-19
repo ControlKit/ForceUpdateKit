@@ -1,11 +1,11 @@
 # ForceUpdateKit
+| ForceUpdateKit |
+|---|
+|
 <table>
   <tr>
     <td bgcolor="#f0f0f0">
-| ForceUpdateKit |
-|---|
-| <img src='https://github.com/maziar/ReadmeFiles/blob/main/ForceUpdateKit.png' width='200'/>
-
+ <img src='https://github.com/maziar/ReadmeFiles/blob/main/ForceUpdateKit.png' width='200'/>
     </td>
   </tr>
 </table>
