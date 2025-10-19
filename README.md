@@ -13,10 +13,22 @@
 
 **ForceUpdateKit** This repo is for checking the force update of app and handle the force update flow.
 
+## Cross-Platform Support
+
+ForceUpdateKit is available for both iOS and Android platforms:
+
+- **iOS**: [ForceUpdateKit](https://github.com/ControlKit/ForceUpdateKit) (Swift)
+- **Android**: [ForceUpdateKit-Android](https://github.com/ControlKit/ForceUpdateKit-Android) (Kotlin)
+
 ## Features
 *  ***Force Update*** without implementing server and client
 *  ***Variety*** of style and configuration.
 *  ***Compatible*** with all platforms
+*  ***Cross-Platform*** support for iOS and Android
+*  ***Retry Mechanism*** with configurable retry attempts
+*  ***Customizable UI*** with full control over appearance
+*  ***Multi-language*** support
+*  ***Network Error Handling*** with retry connection view
 
 
 ## Installation
@@ -54,6 +66,8 @@ dependencies: [
 
 ## Tutorial
 * [Getting started](#getting_started)
+* [Advanced Configuration](#advanced_configuration)
+* [Retry Mechanism](#retry_mechanism)
 
 ### 1. Getting started <a id='getting_started'></a>
 
@@ -64,9 +78,42 @@ in Appdelegate or SceneDelegate or wherever you need it you can call:
 import ForceUpdateKit
 
 Task {
-    await ForceUpdateKit().configure()
- }
+    let config = UpdateServiceConfig(
+        style: .fullscreen1,
+        appId: "com.your.app",
+        language: .english
+    )
+    await ForceUpdateKit().configure(config: config, maxRetries: 5)
+}
 ```
+
+### 2. Advanced Configuration <a id='advanced_configuration'></a>
+
+```swift
+let config = UpdateServiceConfig(
+    style: .fullscreen1,
+    appId: "com.your.app",
+    language: .persian
+)
+
+// Customize retry connection view
+config.viewConfig.retryTitleText = "خطا در اتصال"
+config.viewConfig.retryMessageText = "لطفاً اتصال اینترنت خود را بررسی کنید"
+config.viewConfig.retryButtonTitle = "تلاش مجدد"
+config.viewConfig.maxRetriesAlertTitle = "خطا در اتصال"
+config.viewConfig.maxRetriesAlertMessage = "امکان اتصال به سرور وجود ندارد"
+
+await ForceUpdateKit().configure(config: config, maxRetries: 3)
+```
+
+### 3. Retry Mechanism <a id='retry_mechanism'></a>
+
+The library includes a built-in retry mechanism for handling network errors:
+
+- **Automatic Retry**: When network request fails, a retry view is shown
+- **Configurable Attempts**: Set maximum retry attempts (default: 5)
+- **Custom UI**: Fully customizable retry connection view
+- **Error Handling**: Graceful handling of max retries reached
 
 ## Demos
 * [Demo1 - FullScreen1](#fullscreen1)
@@ -196,16 +243,23 @@ Task {
 ## Service Configuration
 this is the default value ***Service configuration*** class that you configure all items that you want custom:
 
-```
+```swift
 public struct UpdateServiceConfig {
-    public var route: String = "https://my.api.mockaroo.com/forceupdate.json?key=2202ab40"
-    public var appId: String = Bundle.main.bundleIdentifier ?? String()
+    public init(style: ForceUpdateViewStyle = .fullscreen1,
+                appId: String,
+                language: CKLanguage) {
+        self.viewConfig = ForceUpdateViewStyle.getViewConfigWithStyle(style: style, language: language)
+        self.appId = appId
+        self.language = language
+    }
+    public var appId: String
+    public var language: CKLanguage
     public var version: String = Bundle.main.releaseVersionNumber ?? String()
-    public var viewConfig: ForceUpdateViewConfig = ForceUpdateViewConfig()
+    public var viewConfig: ForceUpdateViewConfig
 }
 ```
 
-that you can define or pass a new value for the route or use the default for using from our service.
+The library now uses ControlKitBase for better integration and supports multiple languages through CKLanguage enum.
 
 **e.g.**
 ## Configuration Custom Server and Endpoint
