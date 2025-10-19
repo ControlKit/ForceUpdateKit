@@ -102,11 +102,11 @@ let config = UpdateServiceConfig(
 )
 
 // Customize retry connection view
-config.viewConfig.retryTitleText = "خطا در اتصال"
-config.viewConfig.retryMessageText = "لطفاً اتصال اینترنت خود را بررسی کنید"
-config.viewConfig.retryButtonTitle = "تلاش مجدد"
-config.viewConfig.maxRetriesAlertTitle = "خطا در اتصال"
-config.viewConfig.maxRetriesAlertMessage = "امکان اتصال به سرور وجود ندارد"
+config.viewConfig.retryTitleText = "Connection Error"
+config.viewConfig.retryMessageText = "Please check your internet connection and try again"
+config.viewConfig.retryButtonTitle = "Retry"
+config.viewConfig.maxRetriesAlertTitle = "Connection Error"
+config.viewConfig.maxRetriesAlertMessage = "Unable to connect to server. Please try again later."
 
 await ForceUpdateKit().configure(config: config, maxRetries: 3)
 ```
@@ -559,11 +559,11 @@ Task {
     config.viewConfig.versionTextColor = .orange
     
     // Customize retry connection view
-    config.viewConfig.retryTitleText = "خطا در اتصال"
-    config.viewConfig.retryMessageText = "لطفاً اتصال اینترنت خود را بررسی کنید"
-    config.viewConfig.retryButtonTitle = "تلاش مجدد"
-    config.viewConfig.maxRetriesAlertTitle = "خطا در اتصال"
-    config.viewConfig.maxRetriesAlertMessage = "امکان اتصال به سرور وجود ندارد"
+    config.viewConfig.retryTitleText = "Connection Error"
+    config.viewConfig.retryMessageText = "Please check your internet connection and try again"
+    config.viewConfig.retryButtonTitle = "Retry"
+    config.viewConfig.maxRetriesAlertTitle = "Connection Error"
+    config.viewConfig.maxRetriesAlertMessage = "Unable to connect to server. Please try again later."
     
     await ForceUpdateKit().configure(config: config, maxRetries: 3)
 }
