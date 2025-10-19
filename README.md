@@ -1,5 +1,5 @@
 # ForceUpdateKit
-[highlight]| ForceUpdateKit |
+| ForceUpdateKit |
 |---|
 |<img src='https://github.com/maziar/ReadmeFiles/blob/main/ForceUpdateKit.png' width='200'/>|
 
