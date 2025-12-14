@@ -35,7 +35,11 @@ public struct ForceUpdateViewPresenter {
     
     func setImageToConfig(from url: URL) {
         getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
+            guard let data = data, error == nil else {
+                let placeholder = ImageHelper.image(config.updateImageType.rawValue)
+                self.config.updateImage = placeholder
+                return
+            }
             self.config.updateImage = UIImage(data: data)
         }
     }
